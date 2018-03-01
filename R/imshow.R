@@ -19,9 +19,9 @@ imshow <- function(x) {
     y=1:nrow(x),
     z=t(x)
   )
-  image(i,
+  graphics::image(i,
     # map intensity to grey levels
-    col=grey(0:254/254),
+    col=grDevices::grey(0:254/254),
     # for 1:1 aspect ratio
     asp=1,
     # suppress decorations
