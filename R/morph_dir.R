@@ -8,9 +8,9 @@
 #' @export
 #' @examples
 #' amph <- system.file("extdata", "amphipoda", package="morphr")
-#' imgshow(morph_dir(amph))
-#' imgshow(morph_dir(amph, n=3))
-#' imgshow(morph_dir(amph, n=10, adjust_grey=TRUE))
+#' imshow(morph_dir(amph))
+#' imshow(morph_dir(amph, n=3))
+#' imshow(morph_dir(amph, n=10, adjust_grey=TRUE))
 morph_dir <- function(path, n=15, write=FALSE, adjust_grey=FALSE) {
   img <- pymorph$morph_dir(path, as.integer(n), write, adjust_grey)
   if (write) {
