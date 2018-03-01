@@ -184,3 +184,11 @@ def morph_dir(path, n=15, write=True, adjust_grey=False):
     # return the morph
     return(img)
 
+# ## TEST ----
+#
+# import os
+# source = 'zooscanPtBWP2/level1/'
+# # foo = morph_dir(os.path.join(source, 'Creseidae'), n=15, write=True)
+# for taxon in [d for d in os.listdir(source) if os.path.isdir(os.path.join(source, d))]:
+#     print(taxon)
+#     foo = morph_dir(os.path.join(source, taxon), n=15, write=True)
