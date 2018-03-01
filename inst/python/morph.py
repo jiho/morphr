@@ -109,11 +109,15 @@ def autocrop(x, threshold=0):
 ## ACTUAL MORPHING ----
 
 # Morph several images into one
-def morph(paths, dest=''):
+def morph(paths, dest='', adjust_grey=False):
     import numpy as np
     import skimage as im
+    from skimage import exposure as exp
+    from scipy.optimize import minimize
     # read all files
     imgs = [img_read(f) for f in paths]
+    #
+    # 1. Rotate and superpose all images
     # rotate all images (and orient them)
     imgs = [rotate(i) for i in imgs]
     # compute max width and height to accomodate all images
@@ -123,8 +127,34 @@ def morph(paths, dest=''):
     w = max(widths) * 2
     # center all images
     imgs = [center(i, h, w) for i in imgs]
+    #
+    # 2. Average and adjust grey level
     # compute the average image = the morph
     img = np.mean(imgs, axis=0)
+    if adjust_grey:
+        # compute the average of mean grey levels over all images
+        # = this will be the target to match here
+        mean_gray_one = np.mean([measure_largest(i).mean_intensity for i in imgs])
+        # search for the best gamma correction
+        def optim_contrast(g, args):
+            img = args[0]; target = args[1]
+            # constrast the image
+            imgg = exp.adjust_gamma(img, gamma=g)
+            # compare its mean grey to the target one
+            mean_gray = measure_largest(imgg).mean_intensity
+            criterion = abs(target - mean_gray)
+            return(criterion)
+        # search for the minimal difference
+        res = minimize(optim_contrast, x0=1, args=((img, mean_gray_one),), method='L-BFGS-B', tol=0.05, bounds=((0.1, 1),))
+        # compute the mean gray of the morph before correction
+        # mean_grey_before = measure_largest(img).mean_intensity
+        # adjust grey levels based on this optimized gamma
+        img = exp.adjust_gamma(img, gamma=res.x[0])
+        # compute mean gray after correction
+        # mean_grey_after = measure_largest(img).mean_intensity
+        # print(' target:', mean_gray_one, 'orig:', mean_grey_before, ' adj:', mean_grey_after, ' (gamma:', res.x[0], ')')
+    #
+    # 3. Finalise image
     # crop it
     img = autocrop(img)
     # invert the image and convert it to integer
@@ -136,7 +166,7 @@ def morph(paths, dest=''):
     return(img)
 
 # Morph a random selection of images from a directory into one
-def morph_dir(path, n=15, write=True):
+def morph_dir(path, n=15, write=True, adjust_grey=False):
     import os
     import numpy as np
     # list jpg files under path
@@ -150,7 +180,7 @@ def morph_dir(path, n=15, write=True):
     else:
         dest = ''
     # compute the morphing (and write it as a file if needed)
-    img = morph([os.path.join(path, f) for f in files], dest=dest)
+    img = morph([os.path.join(path, f) for f in files], dest=dest, adjust_grey=adjust_grey)
     # return the morph
     return(img)
 

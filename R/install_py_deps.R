@@ -20,6 +20,7 @@ install_py_deps <- function() {
   test_module("pillow", "PIL")
   test_module("scikit-image", "skimage")
   test_module("numpy")
+  test_module("scipy")
   message("All done")
 }
 
