@@ -1,4 +1,4 @@
-Package: morph
+Package: morphr
 Type: Package
 Title: Morph Several Images Into One
 Version: 0.1.0

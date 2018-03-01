@@ -6,9 +6,9 @@
 #' @return A matrix containing the pixel values for the morphed image, in [0,255] (black to white).
 #' @export
 #' @examples
-#' img <- morph_dir(system.file("extdata", "amphipoda", package="morph"))
+#' img <- morph_dir(system.file("extdata", "amphipoda", package="morphr"))
 #' image(img, col=grey(1:255/255), asp=1)
-#' img <- morph_dir(system.file("extdata", "amphipoda", package="morph"), n=3)
+#' img <- morph_dir(system.file("extdata", "amphipoda", package="morphr"), n=3)
 #' image(img, col=grey(1:255/255), asp=1)
 morph_dir <- function(path, n=15, write=FALSE) {
   img <- pymorph$morph_dir(path, as.integer(n), write)

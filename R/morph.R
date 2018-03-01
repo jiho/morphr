@@ -5,12 +5,12 @@
 #' @return A matrix containing the pixel values for the morphed image, in [0,255] (black to white).
 #' @export
 #' @examples
-#' source <- system.file("extdata", "amphipoda", package="morph")
+#' source <- system.file("extdata", "amphipoda", package="morphr")
 #' files <- list.files(source, full.names=TRUE)
 #' img <- morph(files)
 #' image(img, col=grey(1:255/255), asp=1)
 #' \dontrun{
-#' img <- morph(files, dest=path.expand("~/amphipoda_morph.jpg"))
+#' img <- morph(files, dest=path.expand("~/amphipoda_morphed.jpg"))
 #' }
 morph <- function(paths, dest="") {
   img <- pymorph$morph(paths, dest)
