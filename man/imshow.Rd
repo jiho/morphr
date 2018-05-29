@@ -7,7 +7,7 @@
 imshow(x)
 }
 \arguments{
-\item{x}{input array of pixels}
+\item{x}{input array of pixels, with grey levels coded in [0, 255]}
 }
 \value{
 The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.
@@ -16,6 +16,10 @@ The (x, y, z) list used to plot the image, which is also suitable for contour, p
 Display an array of pixel as a greyscale image
 }
 \examples{
+# check that the overall grey level is reflected in the plot
+imshow(matrix(runif(100, 0, 100), nrow=10))
+imshow(matrix(runif(100, 150, 250), nrow=10))
+
 # read an image through python
 io <- reticulate::import("skimage.io", as="io")
 img <- io$imread(

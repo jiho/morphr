@@ -1,9 +1,13 @@
 #' Display an array of pixel as a greyscale image
 #'
-#' @param x input array of pixels
+#' @param x input array of pixels, with grey levels coded in [0, 255]
 #' @return The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.
 #' @export
 #' @examples
+#' # check that the overall grey level is reflected in the plot
+#' imshow(matrix(runif(100, 0, 100), nrow=10))
+#' imshow(matrix(runif(100, 150, 250), nrow=10))
+#'
 #' # read an image through python
 #' io <- reticulate::import("skimage.io", as="io")
 #' img <- io$imread(
@@ -20,8 +24,8 @@ imshow <- function(x) {
     z=t(x)
   )
   graphics::image(i,
-    # map intensity to grey levels
-    col=grDevices::grey(0:254/254),
+    # map intensity in [0:255] to grey levels
+    col=grDevices::grey(0:254/254), breaks=0:255,
     # for 1:1 aspect ratio
     asp=1,
     # suppress decorations
