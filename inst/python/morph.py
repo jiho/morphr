@@ -15,7 +15,7 @@ def img_prepare(path):
 def img_save(path, img):
     import skimage as im
     img = im.util.invert(img)
-    im.io.imsave(path, im.img_as_ubtye(img))
+    im.io.imsave(path, im.img_as_ubyte(img))
     # TODO: suppress warning
     pass
 
