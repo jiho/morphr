@@ -5,7 +5,7 @@ def img_read(path):
     import skimage as im
     from skimage import io
     # read image
-    img = io.imread(path, as_grey=True)
+    img = io.imread(path, as_gray=True)
     # invert it and convert it to [0,1] (useful for future processing)
     img = 1 - im.img_as_float(img)
     return(img)
