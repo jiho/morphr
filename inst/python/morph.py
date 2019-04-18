@@ -20,9 +20,9 @@ def img_save(path, img):
     pass
 
 # Show an array as an image
-def v(x):
-    from skimage import io
-    io.imshow(x)
+def v(img):
+    import skimage as im
+    im.io.imshow(img)
     pass
 
     import skimage as im
