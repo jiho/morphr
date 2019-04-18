@@ -21,7 +21,7 @@ imshow <- function(x) {
   i <- list(
     x=1:ncol(x),
     y=1:nrow(x),
-    z=t(x)
+    z=t(x)[,nrow(x):1]
   )
   graphics::image(i,
     # map intensity in [0:255] to grey levels
