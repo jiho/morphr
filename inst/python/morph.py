@@ -149,14 +149,16 @@ def morph(paths, dest='', adjust_grey=False):
             criterion = abs(target - mean_gray)
             return(criterion)
         # search for the minimal difference
-        res = minimize(optim_contrast, x0=1, args=((img, mean_gray_one),), method='L-BFGS-B', tol=0.05, bounds=((0.1, 1),))
+        res = minimize(optim_contrast, x0=1, args=((img, mean_gray_one),),
+                       method='L-BFGS-B', tol=0.05, bounds=((0.1, 1),))
         # compute the mean gray of the morph before correction
         # mean_grey_before = measure_largest(img).mean_intensity
         # adjust grey levels based on this optimized gamma
         img = exp.adjust_gamma(img, gamma=res.x[0])
         # compute mean gray after correction
         # mean_grey_after = measure_largest(img).mean_intensity
-        # print(' target:', mean_gray_one, 'orig:', mean_grey_before, ' adj:', mean_grey_after, ' (gamma:', res.x[0], ')')
+        # print(' target:', mean_gray_one, 'orig:', mean_grey_before,
+        #       ' adj:', mean_grey_after, ' (gamma:', res.x[0], ')')
     #
     # 3. Finalise image
     # crop it
