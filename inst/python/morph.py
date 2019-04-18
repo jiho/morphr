@@ -1,14 +1,23 @@
 ## I/O ----
 
-# Read an image file and return a ndarray
-def img_read(path):
+# Read an image file, invert it, return a ndarray
+def img_prepare(path):
     import skimage as im
-    from skimage import io
-    # read image
-    img = io.imread(path, as_gray=True)
-    # invert it and convert it to [0,1] (useful for future processing)
-    img = 1 - im.img_as_float(img)
+    # read image (as 64bit floating point grey scale)
+    img = im.io.imread(path, as_gray=True)
+    # make sure it is in greyscale, 64bits format
+    img = im.img_as_float(img)
+    # invert it (useful for future processing)
+    img = im.util.invert(img)
     return(img)
+
+# Invert an image and save it to a file
+def img_save(path, img):
+    import skimage as im
+    img = im.util.invert(img)
+    im.io.imsave(path, im.img_as_ubtye(img))
+    # TODO: suppress warning
+    pass
 
 # Show an array as an image
 def v(x):
@@ -16,12 +25,7 @@ def v(x):
     io.imshow(x)
     pass
 
-# Write an ndarray as an image into a file
-def img_write(path, x):
     import skimage as im
-    from skimage import io
-    # write it
-    io.imsave(path, x)
     pass
 
 ## MEASURE ----
@@ -115,7 +119,7 @@ def morph(paths, dest='', adjust_grey=False):
     from skimage import exposure as exp
     from scipy.optimize import minimize
     # read all files
-    imgs = [img_read(f) for f in paths]
+    imgs = [img_prepare(f) for f in paths]
     #
     # 1. Rotate and superpose all images
     # rotate all images (and orient them)
@@ -161,7 +165,7 @@ def morph(paths, dest='', adjust_grey=False):
     img = im.img_as_ubyte(1 - img)
     # write it if needed
     if dest != '':
-        img_write(dest, img)
+        img_save(dest, img)
     # return it
     return(img)
 
