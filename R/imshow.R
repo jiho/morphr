@@ -23,6 +23,9 @@ imshow <- function(x) {
     y=1:nrow(x),
     z=t(x)[,nrow(x):1]
   )
+  # set a plot window with a grey background and no margins
+  pars <- par(no.readonly=TRUE)
+  par(bg="grey50", mai=c(0,0,0,0))
   graphics::image(i,
     # map intensity in [0:255] to grey levels
     col=grDevices::grey(0:254/254), breaks=0:255,
@@ -31,5 +34,6 @@ imshow <- function(x) {
     # suppress decorations
     xaxt="n", yaxt="n", bty="n"
   )
+  par(pars)
   return(invisible(i))
 }
