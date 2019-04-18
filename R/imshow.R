@@ -12,7 +12,7 @@
 #' io <- reticulate::import("skimage.io", as="io")
 #' img <- io$imread(
 #'   system.file("extdata", "amphipoda", "33463695.jpg", package="morphr"),
-#'   as_grey=TRUE
+#'   as_gray=TRUE
 #' )
 #' # display it
 #' imshow(img)
