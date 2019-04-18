@@ -38,6 +38,7 @@ def img_crop_largest(in_path, out_path, t=0, r=0, b=0, l=0, threshold=0):
     img_save(out_path, xc)
     pass
 
+
 ## MEASURE ----
 
 # Fast area computation from a RegionProperties object
@@ -67,6 +68,7 @@ def mark_centroid(x):
     c = [int(l) for l in c]
     x[c[0],c[1]] = 1
     return(x)
+
 
 ## TRANSFORM ----
 
@@ -119,6 +121,7 @@ def autocrop(x, threshold=0):
     # extract its values = the crop
     xc = props.intensity_image
     return(xc)
+
 
 ## ACTUAL MORPHING ----
 
