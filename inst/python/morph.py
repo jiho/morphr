@@ -25,7 +25,17 @@ def v(img):
     im.io.imshow(img)
     pass
 
+# Extract largest particle and write it to a file
+def img_crop_largest(in_path, out_path, t=0, r=0, b=0, l=0, threshold=0):
     import skimage as im
+    # read image as grey levels
+    x = img_prepare(in_path)
+    # pre-crop some useless portions
+    xc = im.util.crop(x, ((t,b),(l,r)))
+    # find the larger particle in the remaining 
+    xc = autocrop(xc, threshold)
+    # save the file
+    img_save(out_path, xc)
     pass
 
 ## MEASURE ----
