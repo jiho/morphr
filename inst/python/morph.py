@@ -16,7 +16,6 @@ def img_save(path, img, quality=100):
     import skimage as im
     img = im.util.invert(img)
     im.io.imsave(path, im.img_as_ubyte(img), check_contrast=False, quality=quality)
-    # TODO: suppress warning
     pass
 
 # Show an array as an image
