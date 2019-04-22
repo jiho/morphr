@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 .*\.pyc
 .*__pycache__.*
+scratch/*

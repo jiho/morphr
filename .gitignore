@@ -4,3 +4,4 @@
 .Ruserdata
 *.pyc
 *__pycache__*
+scratch/*
