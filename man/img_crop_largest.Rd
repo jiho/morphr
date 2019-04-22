@@ -30,7 +30,7 @@ input_img <- io$imread(input, as_gray=TRUE)*255
 imshow(input_img)
 
 # crop and input image to its largest object
-output <- tempfile(fileext=".png")
+output <- tempfile(fileext=".jpg")
 dir.create(dirname(output), showWarnings=FALSE)
 img_crop_largest(input, output, bottom=31, threshold=2/255)
 
