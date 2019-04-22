@@ -1,10 +1,13 @@
 Package: morphr
 Type: Package
-Title: Morph Several Images Into One
-Version: 0.1.0
+Title: Analyse the Morphology of Objects on Images
+Version: 0.2.0
 Author: Jean-Olivier Irisson
 Maintainer: Jean-Olivier Irisson <irisson@normalesup.org>
-Description: Read a list of images, analyse them to rotate and orient them in a similar direction, then overlay them and a compute an average.
+Description: Functions to analyse the morphology of objects in a reduced space,
+  inspect this morphological space, "morph" similar images into one (align, rotate,
+  and merge them), reprocess images to isolate objects or compute some features,
+  etc. Most of the image processing is done in Python through skimage.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
