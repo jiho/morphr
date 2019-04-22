@@ -26,6 +26,8 @@
 #' img <- morph(cres, adjust_grey=TRUE)
 #' imshow(img)
 morph <- function(paths, dest="", adjust_grey=FALSE) {
+  # make sure paths is considered as a list even if it has only one element
+  if ( length(paths) == 1 ) { paths <- list(paths) }
   img <- pymorph$morph(paths, dest, adjust_grey)
   if (dest != "") {
     invisible(img)
