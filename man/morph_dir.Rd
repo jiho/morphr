@@ -11,7 +11,7 @@ morph_dir(path, n = 15, write = FALSE, adjust_grey = FALSE)
 
 \item{n}{how many images to randomly select within the directory. Set this to a very high number to process all}
 
-\item{write}{boolean, whether to write the image next to the directiry in which the files are read. When FALSE (the default), the morphed image is returned, as a matrix. When TRUE, the image is written to disk and returned invisibly by the function.}
+\item{write}{boolean, whether to write the image next to the directory in which the files are read. When FALSE (the default), the morphed image is returned, as a matrix. When TRUE, the image is written to disk and returned invisibly by the function.}
 
 \item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the orignal images it was constructed with. Usually, computing the average(i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computatin and is therefore switched off by default.}
 }
