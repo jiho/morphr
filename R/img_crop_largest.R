@@ -24,8 +24,8 @@
 #' imshow(output_img)
 img_crop_largest <- function(in_path, out_path, top=0, right=0, bottom=0, left=0, threshold=0) {
   out <- pymorph$img_crop_largest(
-    in_path, out_path, as.integer(top),
-    as.integer(right), as.integer(bottom), as.integer(left),
+    in_path, out_path,
+    as.integer(top), as.integer(right), as.integer(bottom), as.integer(left),
     threshold
   )
   return(invisible(out))
