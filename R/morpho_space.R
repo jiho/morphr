@@ -10,7 +10,7 @@
 #'
 #' @export
 #' @examples
-#' s <- morpho_space(plank[,-(1:2)], weights=plank$w)
+#' s <- morpho_space(plank[,-(1:2)], weights=plank$conc)
 #' plot(s, choix="ind")
 #' plot(s, choix="var")
 morpho_space <- function(x, weights=NULL, ...) {

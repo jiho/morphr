@@ -20,7 +20,7 @@ An object of class `PCA`, see [FactoMineR::PCA()] for more information.
 Build a morphological space by computing a Principal Component Analysis on a table of morphological descriptors.
 }
 \examples{
-s <- morpho_space(plank[,-(1:2)], weights=plank$w)
+s <- morpho_space(plank[,-(1:2)], weights=plank$conc)
 plot(s, choix="ind")
 plot(s, choix="var")
 }
