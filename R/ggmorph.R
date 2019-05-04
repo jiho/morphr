@@ -132,6 +132,10 @@ ggmorph_get <- function(space, dimensions) {
   # and get the objects of interest
   X <- X[middle,]
 
+  # get percentage of variance explained and use it to define axes labels
+  var <- space$eig[dimensions,2]
+  attr(X, "labels") <- paste0("PC", dimensions, " (", round(var, 1), "%)")
+
   X
 }
 
@@ -141,7 +145,7 @@ ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey) {
   if (n_imgs > 100) {
     stop("n_imgs is too big")
   }
-  X %>% dplyr::group_by(.data$bin) %>%
+  Xm <- X %>% dplyr::group_by(.data$bin) %>%
     # pick at most n_imgs in each bin
     dplyr::sample_n(size=min(n_imgs, dplyr::n())) %>%
     dplyr::summarise(
@@ -154,6 +158,9 @@ ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey) {
     dplyr::group_by(.data$bin) %>%
     dplyr::mutate(w=ncol(.data$img[[1]]), h=nrow(.data$img[[1]])) %>%
     dplyr::ungroup()
+
+  attr(Xm, "labels") <- attr(X, "labels")
+  return(Xm)
 }
 
 
@@ -161,11 +168,21 @@ ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey) {
 ggmorph_plot <- function(Xm, scale) {
   # prepare the plot space
   p <- ggplot2::ggplot() +
+    # set coordinates
     ggplot2::coord_fixed(xlim=range(Xm$x), ylim=range(Xm$y)) +
     # TODO: maybe expand the range a bit
-    ggplot2::theme_void() +
-    ggplot2::geom_hline(ggplot2::aes(yintercept=0), colour="grey80") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept=0), colour="grey80")
+    # add an invisible point for breaks, scales, etc. to work
+    ggplot2::geom_point(ggplot2::aes(x=0, y=0), alpha=0) +
+    # make a simple theme
+    ggplot2::theme_light() +
+    ggplot2::theme(
+      axis.text=ggplot2::element_blank(),
+      axis.ticks=ggplot2::element_blank(),
+      panel.border=ggplot2::element_blank()
+    ) +
+    # add lines to define center of space
+    ggplot2::scale_x_continuous(attr(Xm, "labels")[1], breaks=0) +
+    ggplot2::scale_y_continuous(attr(Xm, "labels")[2], breaks=0)
 
   # plot each morphed image
   for (i in 1:nrow(Xm)) {
@@ -174,6 +191,7 @@ ggmorph_plot <- function(Xm, scale) {
       grid::rasterGrob(make_transparent(Xi$img[[1]])),
       xmin=Xi$x-Xi$w*scale, xmax=Xi$x+Xi$w*scale,
       ymin=Xi$y-Xi$h*scale, ymax=Xi$y+Xi$h*scale
+      # TODO scale by power low or something, to see better the small ones
     )
   }
 
