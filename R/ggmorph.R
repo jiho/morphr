@@ -171,7 +171,7 @@ ggmorph_plot <- function(Xm, scale) {
   for (i in 1:nrow(Xm)) {
     Xi <- Xm[i,]
     p <- p + ggplot2::annotation_custom(
-      grid::rasterGrob(Xi$img[[1]]),
+      grid::rasterGrob(make_transparent(Xi$img[[1]])),
       xmin=Xi$x-Xi$w*scale, xmax=Xi$x+Xi$w*scale,
       ymin=Xi$y-Xi$h*scale, ymax=Xi$y+Xi$h*scale
     )
