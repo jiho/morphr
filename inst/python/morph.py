@@ -14,7 +14,6 @@ def img_prepare(path):
 # Invert an image and save it to a file
 def img_save(path, img, quality=100):
     import skimage as im
-    img = im.util.invert(img)
     im.io.imsave(path, im.img_as_ubyte(img), check_contrast=False, quality=quality)
     pass
 
@@ -33,6 +32,8 @@ def img_crop_largest(in_path, out_path, t=0, r=0, b=0, l=0, threshold=0):
     xc = im.util.crop(x, ((t,b),(l,r)))
     # find the larger particle in the remaining 
     xc = autocrop(xc, threshold)
+    # invert to white background
+    xc = im.util.invert(xc)
     # save the file
     img_save(out_path, xc, quality=100)
     pass
