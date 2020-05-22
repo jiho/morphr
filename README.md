@@ -26,4 +26,4 @@ Use `ggimg_grid()`, `ggmorph_radial()`, `ggmorph_tile()` to display several imag
 
 ![Morphospace of plankton](pca_morphs12.png)
 
-Two first axes of a morphospace for planktonic organisms, with larger organisms on the right and darker organisms at the bottom.
+*Two first axes of a morphospace for planktonic organisms, with larger organisms on the right and darker organisms at the bottom.*
