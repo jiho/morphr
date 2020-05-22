@@ -70,6 +70,17 @@ def measure_largest(x, threshold=0):
     props = props[np.argmax(areas)]
     return(props)
 
+def img_props_largest(in_path, properties, t=0, r=0, b=0, l=0, threshold=0):
+    import skimage as im
+    # read image as grey levels
+    x = img_prepare(in_path)
+    # pre-crop some useless portions
+    xc = im.util.crop(x, ((t,b),(l,r)))
+    # measure properties
+    props = measure_largest(xc, threshold=threshold)
+    props = im.measure._regionprops._props_to_dict([props], properties=properties)
+    return(props)
+
 # Put a white pixel at the centroid (to visualise it)
 def mark_centroid(x):
     # get centroid
