@@ -2,7 +2,7 @@
 #'
 #' Turn white into fully transparent and black into fully opaque in a greyscale image.
 #'
-#' @param x matrix representing a grayscale image (in [0,1] or [0,255], where the maximum is white).
+#' @param x matrix representing a grayscale image (in `[0,1]` or `[0,255]`, where the maximum is white).
 #'
 #' @export
 #' @examples

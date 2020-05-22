@@ -2,8 +2,8 @@
 #'
 #' @param in_path path to the input image file.
 #' @param out_path path to the file where the result of the crop should be stored.
-#' @param top,right,bottom,left number of pixels to crop from each side of the image.
-#' @param threshold threshold to detect the object from the background. Images are inverted when read and the input grey levels are scaled from 0 (black) to 1 (white). Threshold values should therefore be in [0,1] and typically around 2/255, to remove almost pure black backgrounds.
+#' @param top,right,bottom,left number of pixels to crop from each side of the image before detecting the largest object.
+#' @param threshold threshold to detect the object from the background. Images are inverted when read and the input grey levels are scaled from 0 (black) to 1 (white). Threshold values should therefore be in `[0,1]` and typically around 2/255, to remove almost pure black backgrounds.
 #'
 #' @return Nothing.
 #' @export

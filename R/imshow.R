@@ -1,6 +1,6 @@
 #' Display an array of pixel as a greyscale image
 #'
-#' @param x input array of pixels, with grey levels coded in [0, 255]
+#' @param x input array of pixels, with grey levels coded in `[0, 255]`
 #' @return The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.
 #' @export
 #' @examples
@@ -27,7 +27,7 @@ imshow <- function(x) {
   pars <- graphics::par(no.readonly=TRUE)
   graphics::par(bg="grey50", mai=c(0,0,0,0))
   graphics::image(i,
-    # map intensity in [0:255] to grey levels
+    # map intensity in [0,255] to grey levels
     col=grDevices::grey(0:254/254), breaks=0:255,
     # for 1:1 aspect ratio
     asp=1,

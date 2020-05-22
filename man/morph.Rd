@@ -14,7 +14,7 @@ morph(paths, dest = "", adjust_grey = FALSE)
 \item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the orignal images it was constructed with. Usually, computing the average(i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computatin and is therefore switched off by default.}
 }
 \value{
-A matrix containing the pixel values for the morphed image, in [0,255] (black to white).
+A matrix containing the pixel values for the morphed image, in \code{[0,255]} (black to white).
 }
 \description{
 Morph several images into one

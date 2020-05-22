@@ -12,9 +12,9 @@ img_crop_largest(in_path, out_path, top = 0, right = 0, bottom = 0,
 
 \item{out_path}{path to the file where the result of the crop should be stored.}
 
-\item{top, right, bottom, left}{number of pixels to crop from each side of the image.}
+\item{top, right, bottom, left}{number of pixels to crop from each side of the image before detecting the largest object.}
 
-\item{threshold}{threshold to detect the object from the background. Images are inverted when read and the input grey levels are scaled from 0 (black) to 1 (white). Threshold values should therefore be in [0,1] and typically around 2/255, to remove almost pure black backgrounds.}
+\item{threshold}{threshold to detect the object from the background. Images are inverted when read and the input grey levels are scaled from 0 (black) to 1 (white). Threshold values should therefore be in \code{[0,1]} and typically around 2/255, to remove almost pure black backgrounds.}
 }
 \value{
 Nothing.

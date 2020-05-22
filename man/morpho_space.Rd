@@ -9,12 +9,12 @@ morpho_space(x, weights = NULL, ...)
 \arguments{
 \item{x}{data.frame or matrix of morphological descriptors. Should be all numeric and as close to normally-distributed as possible.}
 
-\item{weights}{vector of objects weights, with no weights by default. Should have as many elements as `x` has rows but does not need to sum to 1.}
+\item{weights}{vector of objects weights, with no weights by default. Should have as many elements as \code{x} has rows but does not need to sum to 1.}
 
-\item{...}{passed to [FactoMineR::PCA()].}
+\item{...}{passed to \code{\link[FactoMineR:PCA]{FactoMineR::PCA()}}.}
 }
 \value{
-An object of class `PCA`, see [FactoMineR::PCA()] for more information.
+An object of class \code{PCA}, see \code{\link[FactoMineR:PCA]{FactoMineR::PCA()}} for more information.
 }
 \description{
 Build a morphological space by computing a Principal Component Analysis on a table of morphological descriptors.

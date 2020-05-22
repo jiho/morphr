@@ -7,7 +7,7 @@
 make_transparent(x)
 }
 \arguments{
-\item{x}{matrix representing a grayscale image (in [0,1] or [0,255], where the maximum is white).}
+\item{x}{matrix representing a grayscale image (in \code{[0,1]} or \code{[0,255]}, where the maximum is white).}
 }
 \description{
 Turn white into fully transparent and black into fully opaque in a greyscale image.

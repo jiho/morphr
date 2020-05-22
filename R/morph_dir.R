@@ -4,7 +4,7 @@
 #' @param n how many images to randomly select within the directory. Set this to a very high number to process all
 #' @param write boolean, whether to write the image next to the directory in which the files are read. When FALSE (the default), the morphed image is returned, as a matrix. When TRUE, the image is written to disk and returned invisibly by the function.
 #' @inheritParams morph
-#' @return A matrix containing the pixel values for the morphed image, in [0,255] (black to white).
+#' @return A matrix containing the pixel values for the morphed image, in `[0,255]` (black to white).
 #' @export
 #' @examples
 #' amph <- system.file("extdata", "amphipoda", package="morphr")

@@ -7,7 +7,7 @@
 imshow(x)
 }
 \arguments{
-\item{x}{input array of pixels, with grey levels coded in [0, 255]}
+\item{x}{input array of pixels, with grey levels coded in \code{[0, 255]}}
 }
 \value{
 The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.

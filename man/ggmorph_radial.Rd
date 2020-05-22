@@ -8,7 +8,7 @@ ggmorph_radial(space, imgs, dimensions = c(1, 2), directions = 4,
   steps = 2, n_imgs = 5, adjust_grey = TRUE, scale = 0.01)
 }
 \arguments{
-\item{space}{morphological space object created by [morpho_space()].}
+\item{space}{morphological space object created by \code{\link[=morpho_space]{morpho_space()}}.}
 
 \item{imgs}{vector of paths to images; should have as many elements as are in the morphological space}
 
