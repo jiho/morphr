@@ -3,8 +3,9 @@
 # Read an image file
 def img_read(path):
     import skimage as im
+    from skimage import io
     # read image (as 64bit floating point grey scale)
-    img = im.io.imread(path, as_gray=True)
+    img = io.imread(path, as_gray=True)
     # make sure it is in greyscale, 64bits format
     img = im.img_as_float(img)
     return(img)
@@ -12,8 +13,9 @@ def img_read(path):
 # Read an image file, invert it, return a ndarray
 def img_prepare(path):
     import skimage as im
+    from skimage import io
     # read image (as 64bit floating point grey scale)
-    img = im.io.imread(path, as_gray=True)
+    img = io.imread(path, as_gray=True)
     # make sure it is in greyscale, 64bits format
     img = im.img_as_float(img)
     # invert it (useful for future processing)
