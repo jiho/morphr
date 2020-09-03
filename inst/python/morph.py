@@ -101,7 +101,7 @@ def rotate(x):
     # fit ellipse to largest object and rotate it horizontally
     props = measure_largest(x, threshold=0)
     angle = props.orientation * 180 / np.pi
-    x = transform.rotate(x, angle=-angle, center=props.centroid, resize=True)
+    x = transform.rotate(x, angle=-angle-90, center=props.centroid, resize=True)
     # always put grey level centroid on the top left
     # = usually orient object with head on left and back on top
     props = measure_largest(x, threshold=0)
