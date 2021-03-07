@@ -14,12 +14,12 @@
 #' img_show(x)
 #'
 #' # extract its largest object
-#' img_crop_largest(x) %>% img_show()
+#' img_extract_largest(x) %>% img_show()
 #'
 #' # if we want to be sure to pick up the object itself and not the legend,
 #' # we can start by chopping the legend away
-#' x %>% img_chop(b=31) %>% img_crop_largest() %>% img_show()
-img_crop_largest <- function(x, threshold=1-2/255) {
+#' x %>% img_chop(b=31) %>% img_extract_largest() %>% img_show()
+img_extract_largest <- function(x, threshold=1-2/255) {
   # we start by inverting the image so that thresholding keeps the object, not the background
   xinv <- (1-x)
 
