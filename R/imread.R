@@ -1,14 +1,17 @@
-#' Read an image
+#' Read a grayscale image
 #'
-#' @param path path to the input image file.
+#' @param file path to the input image file.
 #'
-#' @return A matrix with the pixel values of the image.
+#' @return A matrix with the pixel values of the image. Indexes are counted from the top left (i.e. like a matrix).
 #' @export
 #' @examples
-#' img_file  <- system.file("extdata", "16195419.jpg", package="morphr")
-#' x <- imread(img_file)
-#' imshow(x)
-imread <- function(path) {
-  io <- reticulate::import("skimage.io", as="io")
-  io$imread(path, as_gray=TRUE)*255
+#' path <- system.file("extdata", "16195419.jpg", package="morphr")
+#' x <- img_read(path)
+#' img_show(x)
+img_read <- function(file) {
+  x <- imager::load.image(file)
+  # drop colour depth and colour channel info
+  # TODO support colour images
+  x <- x[,,1,1]
+  return(x)
 }
