@@ -14,35 +14,9 @@
 #' x <- img_read(path)
 #' img_show(x)
 img_show <- function(x) {
-  if (inherits(x,"cimg")) {
-    # drop the extra dimensions
-    x <- x[,,1,1]
-  }
-
-  # reverse the y axis for the image to show the in correct orientation
-  x <- x[,ncol(x):1]
-
-  # compute an x, y, z list to force aspect ratio
-  i <- list(
-    x=1:nrow(x),
-    y=1:ncol(x),
-    z=x
-  )
-  # set a plot window with a grey background and no margins?grid>>
-  pars <- graphics::par(no.readonly=TRUE)
-  graphics::par(bg="grey50", mai=c(0,0,0,0))
-
-  # plot the image
-  graphics::image(i,
-    # map intensity in [0,255] to grey levels
-    col=grDevices::grey(0:254/254), breaks=(0:255)/255,
-    # for 1:1 aspect ratio
-    asp=1,
-    # suppress decorations
-    xaxt="n", yaxt="n", bty="n"
-  )
-  # reset graphical parameters to their default
-  graphics::par(pars)
-
-  return(invisible(i))
+  grid::grid.newpage()
+  # draw a neutral grey background
+  grid::grid.rect(gp=gpar(fill="grey50", col=NA))
+  # draw the image
+  grid::grid.raster(x, interpolate=FALSE)
 }
