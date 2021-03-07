@@ -16,7 +16,7 @@
 img_show <- function(x) {
   grid::grid.newpage()
   # draw a neutral grey background
-  grid::grid.rect(gp=gpar(fill="grey50", col=NA))
+  grid::grid.rect(gp=grid::gpar(fill="grey50", col=NA))
   # draw the image
   grid::grid.raster(x, interpolate=FALSE)
 }
