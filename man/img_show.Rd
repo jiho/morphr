@@ -7,7 +7,7 @@
 img_show(x)
 }
 \arguments{
-\item{x}{input array of pixels, with grey levels coded in \verb{[0, 1]}.}
+\item{x}{input greyscale image, with grey levels coded in \verb{[0, 1]}. This can be either a 2D matrix or a 4D \code{\link[imager:cimg]{imager::cimg()}} object.}
 }
 \value{
 The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.
@@ -17,8 +17,8 @@ Display an array of pixel as a greyscale image
 }
 \examples{
 # check that the overall grey level is reflected in the plot
-imshow(matrix(runif(100, 0, 0.5), nrow=10))
-imshow(matrix(runif(100, 0.5, 1), nrow=10))
+img_show(matrix(runif(100, 0, 0.5), nrow=10))
+img_show(matrix(runif(100, 0.5, 1), nrow=10))
 
 # display an image
 path <- system.file("extdata", "16195419.jpg", package="morphr")

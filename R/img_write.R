@@ -1,6 +1,6 @@
-#' Write a grayscale image
+#' Write a greyscale image
 #'
-#' @param x image data matrix: a 2D array of values in `[0,1]`.
+#' @param x a [imager::cimg()] object (as provided by [img_read()] and other image processing functions)
 #' @param file path to the output file; the extension determines the format.
 #' @param quality image quality, for JPG output only.
 #'
@@ -14,7 +14,6 @@
 #' out <- img_write(x, file=tempfile(fileext=".png"))
 #' out
 img_write <- function(x, file, quality=0.9) {
-  im <- imager::as.cimg(x)
-  imager::save.image(im, file, quality=quality)
+  imager::save.image(x, file, quality=quality)
   return(invisible(file))
 }

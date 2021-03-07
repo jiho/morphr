@@ -2,7 +2,7 @@
 % Please edit documentation in R/img_read.R
 \name{img_read}
 \alias{img_read}
-\title{Read a grayscale image}
+\title{Read a greyscale image}
 \usage{
 img_read(file)
 }
@@ -10,10 +10,10 @@ img_read(file)
 \item{file}{path to the input image file.}
 }
 \value{
-A matrix with the pixel values of the image. Indexes are counted from the top left (i.e. like a matrix).
+A \code{\link[imager:cimg]{imager::cimg()}} object, which is a four-dimensional numeric array containing x,y,z,c coordinates, where x,y are dimensions, z is depth, and c is colour.
 }
 \description{
-Read a grayscale image
+Read a greyscale image
 }
 \examples{
 path <- system.file("extdata", "16195419.jpg", package="morphr")
