@@ -7,30 +7,13 @@
 make_transparent(x)
 }
 \arguments{
-\item{x}{matrix representing a grayscale image (in \code{[0,1]} or \code{[0,255]}, where the maximum is white).}
+\item{x}{input greyscale image, of type \code{\link[imager:cimg]{imager::cimg()}}.}
 }
 \description{
 Turn white into fully transparent and black into fully opaque in a greyscale image.
 }
 \examples{
-# create an image
-amph <- list.files(
-          system.file("extdata", "amphipoda", package="morphr"),
-          full.names=TRUE
-       )
-img <- morph(amph)
-dim(img)
-
-# add transparency = turn it into RGBA
-imga <- make_transparent(img)
-dim(imga)
-
-# show the difference between the two
-grid::grid.newpage()
-grid::grid.rect(gp=gpar(fill="dodgerblue"))
-grid::grid.raster(img/255)
-
-grid::grid.newpage()
-grid::grid.rect(gp=gpar(fill="dodgerblue"))
-grid::grid.raster(imga)
+x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+img_show(x)
+img_show(make_transparent(x))
 }

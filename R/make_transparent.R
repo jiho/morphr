@@ -2,38 +2,25 @@
 #'
 #' Turn white into fully transparent and black into fully opaque in a greyscale image.
 #'
-#' @param x matrix representing a grayscale image (in `[0,1]` or `[0,255]`, where the maximum is white).
+#' @param x input greyscale image, of type [imager::cimg()].
 #'
 #' @export
 #' @examples
-#' # create an image
-#' amph <- list.files(
-#'           system.file("extdata", "amphipoda", package="morphr"),
-#'           full.names=TRUE
-#'        )
-#' img <- morph(amph)
-#' dim(img)
-#'
-#' # add transparency = turn it into RGBA
-#' imga <- make_transparent(img)
-#' dim(imga)
-#'
-#' # show the difference between the two
-#' grid::grid.newpage()
-#' grid::grid.rect(gp=gpar(fill="dodgerblue"))
-#' grid::grid.raster(img/255)
-#'
-#' grid::grid.newpage()
-#' grid::grid.rect(gp=gpar(fill="dodgerblue"))
-#' grid::grid.raster(imga)
+#' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+#' img_show(x)
+#' img_show(make_transparent(x))
 make_transparent <- function(x) {
-  # force it into [0,1]
-  if (max(x) > 1) {
-    x <- x / 255
-  }
-  # make an array of black
-  xa <- array(0, dim=c(dim(x), 4))
+  # create pure black RGBA array
+  rgba <- array(data=0, dim=c(imager::width(x), imager::height(x), 1, 4))
+
+  # replace RGB by the actual image
+  rgba[,,1,1:3] <- x[,,1,1]
+
   # turn the input image into a transparency mask
-  xa[,,4] <- 1 - x
-  return(xa)
+  rgba[,,1,4] <- 1-x[,,1,1]
+
+  # convert back into a cimg object
+  rgba <- as.cimg(rgba)
+
+  return(rgba)
 }
