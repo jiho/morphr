@@ -8,8 +8,8 @@
 #' @examples
 #' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
 #' img_show(x)
-#' img_show(make_transparent(x))
-make_transparent <- function(x) {
+#' img_show(img_make_transparent(x))
+img_make_transparent <- function(x) {
   # create pure black RGBA array
   rgba <- array(data=0, dim=c(imager::width(x), imager::height(x), 1, 4))
 
