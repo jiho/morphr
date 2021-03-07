@@ -1,32 +1,44 @@
-#' Crop the largest object from an image and save it
+#' Extract the largest object from an image
 #'
-#' @param in_path path to the input image file.
-#' @param out_path path to the file where the result of the crop should be stored.
-#' @param top,right,bottom,left number of pixels to crop from each side of the image before detecting the largest object.
-#' @param threshold threshold to detect the object from the background. Images are inverted when read and the input grey levels are scaled from 0 (black) to 1 (white). Threshold values should therefore be in `[0,1]` and typically around 2/255, to remove almost pure black backgrounds.
+#' @param x input greyscale image, of type [imager::cimg()]. It is assumed that the object of interest is dark on a white background.
+#' @param threshold grey value threshold to detect the object from the background, in `[0,1]` where `0` is pure black and `1` is pure white. The default threshold value of `1-2/255` keeps almost all pixels that are not pure white in an images that was originally coded as 8-bit (i.e. in `[0,255]`).
 #'
-#' @return Nothing.
+#' @return The extracted object, on a pure white background, as a [imager::cimg()] object.
+#'
 #' @export
+#' @importFrom dplyr %>%
 #' @examples
-#' # get an input images with lots of whitespace and a legend
-#' input  <- system.file("extdata", "16195419.jpg", package="morphr")
-#' io <- reticulate::import("skimage.io", as="io")
-#' input_img <- io$imread(input, as_gray=TRUE)*255
-#' imshow(input_img)
+#' # get an input image with lots of white space, several blobs and a legend
+#' path <- system.file("extdata", "16195419.jpg", package="morphr")
+#' x <- img_read(path)
+#' img_show(x)
 #'
-#' # crop and input image to its largest object
-#' output <- tempfile(fileext=".jpg")
-#' dir.create(dirname(output), showWarnings=FALSE)
-#' img_crop_largest(input, output, bottom=31, threshold=2/255)
+#' # extract its largest object
+#' img_crop_largest(x) %>% img_show()
 #'
-#' # read and show the result
-#' output_img <- io$imread(output, as_gray=TRUE)
-#' imshow(output_img)
-img_crop_largest <- function(in_path, out_path, top=0, right=0, bottom=0, left=0, threshold=0) {
-  out <- pymorph$img_crop_largest(
-    in_path, out_path,
-    as.integer(top), as.integer(right), as.integer(bottom), as.integer(left),
-    threshold
-  )
-  return(invisible(out))
+#' # if we want to be sure to pick up the object itself and not the legend,
+#' # we can start by chopping the legend away
+#' x %>% img_chop(b=31) %>% img_crop_largest() %>% img_show()
+img_crop_largest <- function(x, threshold=1-2/255) {
+  # we start by inverting the image so that thresholding keeps the object, not the background
+  xinv <- (1-x)
+
+  # segment image into particles
+  particles <- xinv %>%
+    imager::threshold(thr=1-threshold) %>%
+    imager::split_connected()
+
+  # find the largest one
+  largest <- particles[[sapply(particles, sum) %>% which.max()]]
+
+  # get the corresponding object from the original image, on a pure white background
+
+  # we mask out the outside of the object, which becomes pure black
+  xmasked <- (xinv * largest)
+  # then we crop to the limits of the object
+  xcropped <- imager::autocrop(xmasked)
+  # and we re-invert the image to get it into grey on white
+  x_largest <- 1 - xcropped
+
+  return(x_largest)
 }
