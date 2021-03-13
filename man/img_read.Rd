@@ -4,10 +4,12 @@
 \alias{img_read}
 \title{Read a greyscale image}
 \usage{
-img_read(file)
+img_read(file, invert = FALSE)
 }
 \arguments{
 \item{file}{path to the input image file.}
+
+\item{invert}{when TRUE, invert the input image (useful for further processing functions such as \code{\link[=img_moments]{img_moments()}} that reaquire light-on-dark input images to make sense.)}
 }
 \value{
 A \code{\link[imager:cimg]{imager::cimg()}} object, which is a four-dimensional numeric array having x,y,z,c coordinates, where x,y are image pixel dimensions, z is depth (for a sequence of images), and c is colour channels (1 for greyscale images, 3 for RGB images, 4 for RGBA images).
@@ -18,5 +20,7 @@ Read a greyscale image
 \examples{
 path <- system.file("extdata", "16195419.jpg", package="morphr")
 x <- img_read(path)
+img_show(x)
+x <- img_read(path, invert=TRUE)
 img_show(x)
 }
