@@ -19,8 +19,8 @@ Read a greyscale image
 }
 \examples{
 path <- system.file("extdata", "16195419.jpg", package="morphr")
-x <- img_read(path)
-img_show(x)
-x <- img_read(path, invert=TRUE)
-img_show(x)
+img_read(path) \%>\% img_show()
+img_read(path, invert=TRUE) \%>\% img_show()
+# or shorter
+img_read(path, i=T) \%>\% img_show()
 }
