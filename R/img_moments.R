@@ -44,7 +44,7 @@
 #'   gm(m_i,1,0)/gm(m_i,0,0),
 #'   gm(m_i,0,1)/gm(m_i,0,0)
 #' )
-#' orientation <- 0.5 * atan(2 * gm(mu,1,1) / (gm(mu,2,0) - gm(mu,0,2))) + pi/2
+#' angle <- 0.5 * atan(2 * gm(mu,1,1) / (gm(mu,2,0) - gm(mu,0,2))) + pi/2
 #'
 #' # further normalise by area
 #' mu20_n <- gm(mu,2,0)/gm(mu,0,0)
@@ -53,21 +53,19 @@
 #' major_axis <- 0.5 * sqrt(8 * (mu20_n + mu02_n + sqrt(4* mu11_n^2 + (mu20_n - mu02_n)^2)))
 #' minor_axis <- 0.5 * sqrt(8 * (mu20_n + mu02_n - sqrt(4* mu11_n^2 + (mu20_n - mu02_n)^2)))
 #'
-#' # which allows to identify remarquable features of the image
+#' # which allows to identify remarkable features of the image
 #' image(0:18, 0:27, X_intensity[,,1,1], asp=1, ylim=c(27,0), col=grey(seq(1,0,length=255)))
 #' points(centroid[1], centroid[2], col="red")
 #' points(centre_of_mass[1], centre_of_mass[2], pch=3, col="red")
-#' lines(ellipse(major_axis, minor_axis, orientation, centroid[1], centroid[2]), col="blue")
-#' # and rotate it to a horizontal orientation
-#' (1- imager::imrotate(1-X, -orientation*180/pi, boundary=0)) %>% img_show()
+#' lines(ellipse(major_axis, minor_axis, angle, centroid[1], centroid[2]), col="blue")
 #'
-#' # all this is implemented as functions of this package
+#' # those parameters are derived (with refinement) in functions of this package
 img_moments <- function(x, order=3) {
   M <- x[,,1,1]
 
   # dimensions
-  h <- nrow(M)
   w <- ncol(M)
+  h <- nrow(M)
 
   # matrices of indexes
   # NB: computation assumes 0-based indexing
