@@ -20,7 +20,7 @@ img_make_transparent <- function(x) {
   rgba[,,1,4] <- 1-x[,,1,1]
 
   # convert back into a cimg object
-  rgba <- as.cimg(rgba)
+  rgba <- imager::as.cimg(rgba)
 
   return(rgba)
 }
