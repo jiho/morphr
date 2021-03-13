@@ -2,7 +2,7 @@
 #'
 #' Turn white into fully transparent and black into fully opaque in a greyscale image.
 #'
-#' @param x input greyscale image, of type [imager::cimg()].
+#' @param x a greyscale image, of type [imager::cimg()]
 #'
 #' @export
 #' @examples

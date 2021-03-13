@@ -1,7 +1,9 @@
-#' Extract the largest object from an image
+#' Extract largest object from a greyscale image
 #'
-#' @param x input greyscale image, of type [imager::cimg()]. It is assumed that the object of interest is dark on a white background.
-#' @param threshold grey value threshold to detect the object from the background, in `[0,1]` where `0` is pure black and `1` is pure white. The default threshold value of `1-2/255` keeps almost all pixels that are not pure white in an images that was originally coded as 8-bit (i.e. in `[0,255]`).
+#' Extract the largest dark object over a light image background.
+#'
+#' @inheritParams img_make_transparent
+#' @param threshold grey value threshold to detect the object over the background, in `[0,1]` where `0` is pure black and `1` is pure white. The default threshold value of `1-2/255` keeps almost all pixels that are not pure white in an image that was originally coded as 8-bit (i.e. in `[0,255]`).
 #'
 #' @return The extracted object, on a pure white background, as a [imager::cimg()] object.
 #'

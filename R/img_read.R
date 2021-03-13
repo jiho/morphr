@@ -2,7 +2,7 @@
 #'
 #' @param file path to the input image file.
 #'
-#' @return A [imager::cimg()] object, which is a four-dimensional numeric array containing x,y,z,c coordinates, where x,y are dimensions, z is depth, and c is colour.
+#' @return A [imager::cimg()] object, which is a four-dimensional numeric array having x,y,z,c coordinates, where x,y are image pixel dimensions, z is depth (for a sequence of images), and c is colour channels (1 for greyscale images, 3 for RGB images, 4 for RGBA images).
 #' @export
 #' @examples
 #' path <- system.file("extdata", "16195419.jpg", package="morphr")

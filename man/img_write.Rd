@@ -2,12 +2,12 @@
 % Please edit documentation in R/img_write.R
 \name{img_write}
 \alias{img_write}
-\title{Write a greyscale image}
+\title{Write an image}
 \usage{
 img_write(x, file, quality = 0.9)
 }
 \arguments{
-\item{x}{a \code{\link[imager:cimg]{imager::cimg()}} object (as provided by \code{\link[=img_read]{img_read()}} and other image processing functions)}
+\item{x}{an image, of type \code{\link[imager:cimg]{imager::cimg()}}.}
 
 \item{file}{path to the output file; the extension determines the format.}
 
@@ -17,7 +17,7 @@ img_write(x, file, quality = 0.9)
 The path to the written file, invisibly (assign it to a variable to capture it).
 }
 \description{
-Write a greyscale image
+Write an image
 }
 \examples{
 path <- system.file("extdata", "16195419.jpg", package="morphr")

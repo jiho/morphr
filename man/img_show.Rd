@@ -7,7 +7,7 @@
 img_show(x)
 }
 \arguments{
-\item{x}{input greyscale image, with grey levels coded in \verb{[0, 1]}. This can be either a 2D matrix or a 4D \code{\link[imager:cimg]{imager::cimg()}} object.}
+\item{x}{a greyscale image, with grey levels coded in \verb{[0, 1]}. This can be either a 2D matrix of pixels or a 4D \code{\link[imager:cimg]{imager::cimg()}} object.}
 }
 \value{
 The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.

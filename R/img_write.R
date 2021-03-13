@@ -1,6 +1,6 @@
-#' Write a greyscale image
+#' Write an image
 #'
-#' @param x a [imager::cimg()] object (as provided by [img_read()] and other image processing functions)
+#' @param x an image, of type [imager::cimg()].
 #' @param file path to the output file; the extension determines the format.
 #' @param quality image quality, for JPG output only.
 #'

@@ -1,6 +1,6 @@
 #' Display an array of pixel as a greyscale image
 #'
-#' @param x input greyscale image, with grey levels coded in `[0, 1]`. This can be either a 2D matrix or a 4D [imager::cimg()] object.
+#' @param x a greyscale image, with grey levels coded in `[0, 1]`. This can be either a 2D matrix of pixels or a 4D [imager::cimg()] object.
 #'
 #' @return The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.
 #' @export

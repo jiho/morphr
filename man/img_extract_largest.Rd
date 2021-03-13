@@ -2,20 +2,20 @@
 % Please edit documentation in R/img_extract_largest.R
 \name{img_extract_largest}
 \alias{img_extract_largest}
-\title{Extract the largest object from an image}
+\title{Extract largest object from a greyscale image}
 \usage{
 img_extract_largest(x, threshold = 1 - 2/255)
 }
 \arguments{
-\item{x}{input greyscale image, of type \code{\link[imager:cimg]{imager::cimg()}}. It is assumed that the object of interest is dark on a white background.}
+\item{x}{a greyscale image, of type \code{\link[imager:cimg]{imager::cimg()}}}
 
-\item{threshold}{grey value threshold to detect the object from the background, in \verb{[0,1]} where \code{0} is pure black and \code{1} is pure white. The default threshold value of \code{1-2/255} keeps almost all pixels that are not pure white in an images that was originally coded as 8-bit (i.e. in \verb{[0,255]}).}
+\item{threshold}{grey value threshold to detect the object over the background, in \verb{[0,1]} where \code{0} is pure black and \code{1} is pure white. The default threshold value of \code{1-2/255} keeps almost all pixels that are not pure white in an image that was originally coded as 8-bit (i.e. in \verb{[0,255]}).}
 }
 \value{
 The extracted object, on a pure white background, as a \code{\link[imager:cimg]{imager::cimg()}} object.
 }
 \description{
-Extract the largest object from an image
+Extract the largest dark object over a light image background.
 }
 \examples{
 # get an input image with lots of white space, several blobs and a legend

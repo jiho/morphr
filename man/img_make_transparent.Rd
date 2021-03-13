@@ -7,7 +7,7 @@
 img_make_transparent(x)
 }
 \arguments{
-\item{x}{input greyscale image, of type \code{\link[imager:cimg]{imager::cimg()}}.}
+\item{x}{a greyscale image, of type \code{\link[imager:cimg]{imager::cimg()}}}
 }
 \description{
 Turn white into fully transparent and black into fully opaque in a greyscale image.
