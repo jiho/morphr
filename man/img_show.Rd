@@ -10,7 +10,7 @@ img_show(x)
 \item{x}{a greyscale image, with grey levels coded in \verb{[0, 1]}. This can be either a 2D matrix of pixels or a 4D \code{\link[imager:cimg]{imager::cimg()}} object.}
 }
 \value{
-The (x, y, z) list used to plot the image, which is also suitable for contour, persp, etc. returned invisibly.
+The input image, invisibly (this allows to use img_show() within a pipe chain).
 }
 \description{
 Display an array of pixel as a greyscale image
