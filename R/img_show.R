@@ -17,7 +17,7 @@ img_show <- function(x) {
   # if x is a cimg object:
   # - keep only depth 1
   # - convert the rest in a numeric array to control colour scale etc.
-  if (inherits(x, "cimg")) {
+  if (inherits(x, "imager_array")) {
     x <- x[,,1,]
     x <- aperm(x, perm=if(length(dim(x))==2) { c(2,1) } else { c(2,1,3) })
   }
