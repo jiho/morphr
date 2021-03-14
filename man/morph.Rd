@@ -4,39 +4,38 @@
 \alias{morph}
 \title{Morph several images into one}
 \usage{
-morph(paths, dest = "", adjust_grey = FALSE)
+morph(x, adjust_grey = FALSE, threshold = 2/255, invert = TRUE)
 }
 \arguments{
-\item{paths}{paths to image files to morph together}
+\item{x}{list of images, of type \code{\link[imager:cimg]{imager::cimg()}}, or list/vector of file paths that are then read with \code{\link[=img_read]{img_read()}}.}
 
-\item{dest}{path to a new file in which to write the morphed image. When empty (the default), the morphed image is returned as a matrix. When not empty, the image is written to disk and returned invisibly by the function.}
+\item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the original images it was constructed with. Usually, computing the average (i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computation and is therefore switched off by default.}
 
-\item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the orignal images it was constructed with. Usually, computing the average(i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computatin and is therefore switched off by default.}
+\item{threshold}{grey level threshold used to separate the foreground object from the background for the adjustment of grey level. Ignored when \code{adjust_grey} is FALSE.}
+
+\item{invert}{passed to \code{\link[=img_read]{img_read()}} when \code{x} is a list/vector of file paths: whether to invert the images when reading them. If images are inverted upon being read, the morphed result is inverted back to be produced with the same aspect as the input files.}
 }
 \value{
-A matrix containing the pixel values for the morphed image, in \code{[0,255]} (black to white).
+The morphed image, as a \code{\link[imager:cimg]{imager::cimg()}} object.
 }
 \description{
-Morph several images into one
+Given a set of images, rotate them to the same orientation (with \code{\link[=img_make_horizontal]{img_make_horizontal()}}), align them to their centroid (with \code{\link[=img_center]{img_center()}}), average them, and, optionally, adjust the grey levels of the resulting, morphed, image (see \code{adjust_grey}).
 }
 \examples{
-amph <- list.files(
-          system.file("extdata", "amphipoda", package="morphr"),
-          full.names=TRUE
-       )
-img <- morph(amph)
-imshow(img)
-img <- morph(amph, adjust_grey=TRUE)
-imshow(img)
-\dontrun{
-img <- morph(files, dest=path.expand("~/amphipoda_morphed.jpg"))
-}
-cres <- list.files(
-          system.file("extdata", "creseidae", package="morphr"),
-          full.names=TRUE
-       )
-img <- morph(cres)
-imshow(img)
-img <- morph(cres, adjust_grey=TRUE)
-imshow(img)
+# get a list of images to morph
+amph <- list.files(system.file("extdata", "amphipoda",
+                   package="morphr"), full.names=TRUE)
+# read and plot a couple
+img_read(amph[1]) \%>\% img_show()
+img_read(amph[3]) \%>\% img_show()
+# now morph them all
+morph(amph) \%>\% img_show()
+morph(amph, adjust_grey=TRUE) \%>\% img_show()
+
+cres <- list.files(system.file("extdata", "creseidae",
+                   package="morphr"), full.names=TRUE)
+img_read(cres[1]) \%>\% img_show()
+img_read(cres[2]) \%>\% img_show()
+morph(cres) \%>\% img_show()
+morph(cres, adjust_grey=TRUE) \%>\% img_show()
 }
