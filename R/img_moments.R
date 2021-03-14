@@ -81,7 +81,7 @@ img_moments <- function(x, order=3) {
   # compute moments
   for (i in 0:order) {
     for (j in 0:order) {
-      m[i+1,j+1] <- sum(xp[[i+1]]*yp[[i+1]]*M)
+      m[i+1,j+1] <- sum(xp[[i+1]]*yp[[j+1]]*M)
     }
   }
 
@@ -90,6 +90,9 @@ img_moments <- function(x, order=3) {
   m <- t(m)
   return(m)
 }
+
+
+
 
 #' @rdname img_moments
 #' @export
@@ -119,7 +122,7 @@ img_moments_central <- function(x, order=3) {
   # compute moments
   for (i in 0:order) {
     for (j in 0:order) {
-      mu[i+1,j+1] <- sum(xp[[i+1]]*yp[[i+1]]*M)
+      mu[i+1,j+1] <- sum(xp[[i+1]]*yp[[j+1]]*M)
     }
   }
 
