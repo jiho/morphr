@@ -9,7 +9,8 @@
 #'
 #' @export
 #' @examples
-#' x <- 1 - img_read(system.file("extdata", "amphipoda/33463695.jpg", package="morphr"))
+#' x <- img_read(system.file("extdata", "amphipoda/33463695.jpg",
+#'               package="morphr"), invert=TRUE)
 #' img_show(x)
 #' # center with all defaults
 #' # = around the center of mass of grey levels
@@ -31,7 +32,7 @@ img_center <- function(x, w, h, around=NULL, col=NULL) {
   }
   # define padding colour
   if (is.null(col)) {
-    col <- img_guess_background()
+    col <- img_guess_background(x)
   }
 
   # Function to define padding length in one dimension

@@ -19,7 +19,8 @@ img_center(x, w, h, around = NULL, col = NULL)
 Center the input object within an output image of given dimensions, around a set of coordinates (by default the centroid of the object).
 }
 \examples{
-x <- 1 - img_read(system.file("extdata", "amphipoda/33463695.jpg", package="morphr"))
+x <- img_read(system.file("extdata", "amphipoda/33463695.jpg",
+              package="morphr"), invert=TRUE)
 img_show(x)
 # center with all defaults
 # = around the center of mass of grey levels
