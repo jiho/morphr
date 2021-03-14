@@ -14,13 +14,13 @@
 #' img_show(x)
 #' # center with all defaults
 #' # = around the center of mass of grey levels
-#' xc <- img_center(x, 350, 350) %>% img_show()
-#' # check that the new centroid is around the middle of the image [175,175]
+#' xc <- img_center(x, 350, 500) %>% img_show()
+#' # check that the new centroid is around the middle of the image [175,250]
 #' img_centroid(xc)
 #'
 #' # center around the centroid of the binary image
 #' # = does not take grey levels into account
-#' xc <- img_center(x, 350, 350, around=img_centroid(x>0)) %>% img_show()
+#' xc <- img_center(x, 350, 500, around=img_centroid(x>0)) %>% img_show()
 #' img_centroid(xc>0)
 #' # the binary centroid is in the middle
 #' img_centroid(xc)
@@ -36,7 +36,7 @@ img_center <- function(x, w, h, around=NULL, col=NULL) {
   }
 
   # instead of padding on each side, just create an empty image and paste the current image at the correct location within it (much faster)
-  xf <- matrix(0, nrow=h, ncol=w)
+  xf <- matrix(0, nrow=w, ncol=h)
 
   # define corner point in width and height
   dims <- dim(x)
