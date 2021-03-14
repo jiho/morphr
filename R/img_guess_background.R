@@ -11,5 +11,5 @@
 #' x <- img_read(system.file("extdata", "shape.png", package="morphr")) %>% img_show()
 #' img_guess_background(x)
 img_guess_background <- function(x) {
-  median(c(x[1,], x[,1]))
+  stats::median(c(x[1,], x[,1]))
 }

@@ -65,7 +65,7 @@ morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
       abs(target - mean(img_adjusted[img_adjusted>thr]))
     }
     # use numerical optimization to find the gamma that minimizes the difference in greys
-    best_iter <- optim(
+    best_iter <- stats::optim(
       # parameter to optimise: the gamma
       par=1, fn=match_grey,
       # optimisation method, its bounds, its tolerance

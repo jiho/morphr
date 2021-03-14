@@ -3,7 +3,7 @@ as_rgba_raster <- function(x) {
   # split into channels
   ch <- imager::channels(x)
   # convert to colour
-  xr <- rgb(ch[[1]], ch[[2]], ch[[3]], ch[[4]])
+  xr <- grDevices::rgb(ch[[1]], ch[[2]], ch[[3]], ch[[4]])
   # wrap into a raster
   dim(xr) <- dim(x)[2:1]
   class(xr) <- "raster"
