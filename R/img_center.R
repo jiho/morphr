@@ -5,7 +5,7 @@
 #' @inheritParams img_write
 #' @param w,h the width and height of the output image.
 #' @param around a vector with the x,y coordinate of the point around which to center; by default the centroid of the input image.
-#' @param col the colour to use for padding; by default the median colour of the border.
+#' @param col the colour to use for padding; by default the background colour from [img_guess_background()].
 #'
 #' @export
 #' @examples
@@ -31,7 +31,7 @@ img_center <- function(x, w, h, around=NULL, col=NULL) {
   }
   # define padding colour
   if (is.null(col)) {
-    col <- median(c(x[,1],x[1,]))
+    col <- img_guess_background()
   }
 
   # Function to define padding length in one dimension

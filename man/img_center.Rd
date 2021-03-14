@@ -13,7 +13,7 @@ img_center(x, w, h, around = NULL, col = NULL)
 
 \item{around}{a vector with the x,y coordinate of the point around which to center; by default the centroid of the input image.}
 
-\item{col}{the colour to use for padding; by default the median colour of the border.}
+\item{col}{the colour to use for padding; by default the background colour from \code{\link[=img_guess_background]{img_guess_background()}}.}
 }
 \description{
 Center the input object within an output image of given dimensions, around a set of coordinates (by default the centroid of the object).
