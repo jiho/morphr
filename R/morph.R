@@ -49,11 +49,12 @@ morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
 
   # combine in a single array
   xarray <- imager::as.imlist(xcentred) %>% imager::imappend("z")
-  # crop to largest content
-  xcropped <- imager::autocrop(xarray, color=0)
 
   # average (i.e. morph)
-  xavg <- imager::imsplit(xcropped, "z") %>% imager::average()
+  xavg <- imager::imsplit(xarray, "z") %>% imager::average()
+
+  # crop to largest content
+  xcropped <- imager::autocrop(xavg, color=0)
 
   if (adjust_grey) {
     # compute the average of the average greys of the input image
@@ -71,11 +72,11 @@ morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
       # tolerance is factr*.Machine$double.eps => 1e14 gives ~ 0.02
       method="L-BFGS-B", lower=0.1, upper=2, control=list(factr=1e14),
       # further arguments to match_grey()
-      img=xavg, thr=threshold, target=target_grey)
+      img=xcropped, thr=threshold, target=target_grey)
     # adjust the image with the best gamma value
-    xadjusted <- img_adjust_gamma(xavg, best_iter$par)
+    xadjusted <- img_adjust_gamma(xcropped, best_iter$par)
   } else {
-    xadjusted <- xavg
+    xadjusted <- xcropped
   }
 
   # if the images were inverted when they were read, reinvert the result
