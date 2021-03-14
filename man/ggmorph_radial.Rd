@@ -16,7 +16,7 @@ ggmorph_radial(
 )
 }
 \arguments{
-\item{space}{morphological space object created by \code{\link[=morpho_space]{morpho_space()}}.}
+\item{space}{morphological space object created by \code{\link[=morphospace]{morphospace()}}.}
 
 \item{imgs}{vector of paths to images; should have as many elements as are in the morphological space}
 
@@ -36,7 +36,7 @@ ggmorph_radial(
 Display morphs radially within a morphological space
 }
 \examples{
-space <- morpho_space(plank[,-(1:2)], weights=plank$conc)
+space <- morphospace(plank[,-(1:2)], weights=plank$conc)
 img_root <- system.file("extdata", "plank", package="morphr")
 imgs <- file.path(img_root, paste0(plank$id, ".jpg"))
 set.seed(1)

@@ -13,10 +13,8 @@ ggimg_grid(imgs, scale = 0.001)
 Plot a grid of images
 }
 \examples{
-paths <- list.files(
-  system.file("extdata", "plank", package="morphr"),
-  full.names=TRUE
-)
+paths <- list.files(system.file("extdata", "plank",
+                    package="morphr"), full.names=TRUE)
 ggimg_grid(imgs=sample(paths, 15), scale=0.002)
-ggimg_grid(imgs=sample(paths, 50), scale=0.001)
+ggimg_grid(imgs=sample(paths, 56), scale=0.001)
 }
