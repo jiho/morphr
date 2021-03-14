@@ -18,7 +18,7 @@ A \code{\link[imager:cimg]{imager::cimg()}} object, which is a four-dimensional 
 Read a greyscale image
 }
 \examples{
-path <- system.file("extdata", "16195419.jpg", package="morphr")
+path <- system.file("extdata", "blob.jpg", package="morphr")
 img_read(path) \%>\% img_show()
 img_read(path, invert=TRUE) \%>\% img_show()
 # or shorter

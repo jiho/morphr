@@ -13,7 +13,7 @@ img_make_transparent(x)
 Turn white into fully transparent and black into fully opaque in a greyscale image.
 }
 \examples{
-x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 img_show(x)
 img_show(img_make_transparent(x))
 }

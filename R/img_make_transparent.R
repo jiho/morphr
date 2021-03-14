@@ -6,7 +6,7 @@
 #'
 #' @export
 #' @examples
-#' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+#' x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 #' img_show(x)
 #' img_show(img_make_transparent(x))
 img_make_transparent <- function(x) {
@@ -24,3 +24,4 @@ img_make_transparent <- function(x) {
 
   return(rgba)
 }
+# TODO work with white on black

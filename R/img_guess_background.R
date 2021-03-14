@@ -6,7 +6,7 @@
 #'
 #' @export
 #' @examples
-#' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr")) %>% img_show()
+#' x <- img_read(system.file("extdata", "blob.jpg", package="morphr")) %>% img_show()
 #' img_guess_background(x)
 #' x <- img_read(system.file("extdata", "shape.png", package="morphr")) %>% img_show()
 #' img_guess_background(x)

@@ -7,7 +7,7 @@
 #' @return The path to the written file, invisibly (assign it to a variable to capture it).
 #' @export
 #' @examples
-#' path <- system.file("extdata", "16195419.jpg", package="morphr")
+#' path <- system.file("extdata", "blob.jpg", package="morphr")
 #' x <- img_read(path)
 #' out <- img_write(x, file=tempfile(fileext=".jpg"))
 #' out

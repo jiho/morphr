@@ -27,7 +27,7 @@ Compute raw, central, or central normalised moments of a greyscale image.
 Black pixels have a value of 0 and therefore do not contribute to the moments. To compute the moments based on the shape of the object only, compute a mask where the object is white (1) and the background black (0). To compute the moments of an object based on the grey scale intensities in the object, make the background black (i.e. invert it when the image is dark on white).
 }
 \examples{
-x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 img_show(x)
 # extract the (largest) object from the image
 X <- img_extract_largest(x)

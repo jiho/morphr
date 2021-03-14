@@ -14,13 +14,13 @@
 #' @examples
 #' # get an image with lots of background space, several blobs and a legend
 #' # NB: invert it so that the background is black
-#' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"), invert=TRUE)
+#' x <- img_read(system.file("extdata", "blob.jpg", package="morphr"), invert=TRUE)
 #' img_show(x)
 #' # extract its largest object
 #' img_extract_largest(x) %>% img_show()
 #'
 #' # now leave the image in its original dark-on-light aspect
-#' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+#' x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 #' img_show(x)
 #' # and extraction still works because the image is automatically inverted
 #' img_extract_largest(x) %>% img_show()

@@ -10,7 +10,7 @@
 #' img_show(matrix(runif(100, 0.5, 1), nrow=10))
 #'
 #' # display an image
-#' path <- system.file("extdata", "16195419.jpg", package="morphr")
+#' path <- system.file("extdata", "blob.jpg", package="morphr")
 #' x <- img_read(path)
 #' img_show(x)
 img_show <- function(x) {

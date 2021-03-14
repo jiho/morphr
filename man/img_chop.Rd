@@ -24,7 +24,7 @@ The image with the pixels chopped off.
 Chop away borders from an image
 }
 \examples{
-x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 img_show(x)
 # chop off some pieces around the main object
 img_chop(x, t=17, r=15, b=50, l=15) \%>\% img_show()

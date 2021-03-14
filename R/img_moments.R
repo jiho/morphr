@@ -11,7 +11,7 @@
 #'
 #' @export
 #' @examples
-#' x <- img_read(system.file("extdata", "16195419.jpg", package="morphr"))
+#' x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 #' img_show(x)
 #' # extract the (largest) object from the image
 #' X <- img_extract_largest(x)

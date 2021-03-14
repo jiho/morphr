@@ -6,7 +6,7 @@
 #' @return A [imager::cimg()] object, which is a four-dimensional numeric array having x,y,z,c coordinates, where x,y are image pixel dimensions, z is depth (for a sequence of images), and c is colour channels (1 for greyscale images, 3 for RGB images, 4 for RGBA images).
 #' @export
 #' @examples
-#' path <- system.file("extdata", "16195419.jpg", package="morphr")
+#' path <- system.file("extdata", "blob.jpg", package="morphr")
 #' img_read(path) %>% img_show()
 #' img_read(path, invert=TRUE) %>% img_show()
 #' # or shorter
