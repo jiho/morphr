@@ -72,12 +72,16 @@ img_moments <- function(x, order=3) {
   x <- matrix(rep(0:(w-1), times=h), nrow=h, byrow=TRUE)
   y <- matrix(rep(0:(h-1), times=w), nrow=h)
 
+  # precompute powers, to avoid computing them several times in the moments matrix
+  xp <- lapply(0:order, function(i) {x^i})
+  yp <- lapply(0:order, function(i) {y^i})
+
   # prepare storage for moments
   m <- matrix(NA, nrow=order+1, ncol=order+1)
   # compute moments
   for (i in 0:order) {
     for (j in 0:order) {
-      m[i+1,j+1] <- sum(x^i*y^j*M)
+      m[i+1,j+1] <- sum(xp[[i+1]]*yp[[i+1]]*M)
     }
   }
 
@@ -106,12 +110,16 @@ img_moments_central <- function(x, order=3) {
   x <- matrix(rep(0:(w-1)-x_bar, times=h), nrow=h, byrow=TRUE)
   y <- matrix(rep(0:(h-1)-y_bar, times=w), nrow=h)
 
+  # precompute powers, to avoid computing them several times in the moments matrix
+  xp <- lapply(0:order, function(i) {x^i})
+  yp <- lapply(0:order, function(i) {y^i})
+
   # prepare storage for moments
   mu <- matrix(NA, nrow=order+1, ncol=order+1)
   # compute moments
   for (i in 0:order) {
     for (j in 0:order) {
-      mu[i+1,j+1] <- sum(x^i*y^j*M)
+      mu[i+1,j+1] <- sum(xp[[i+1]]*yp[[i+1]]*M)
     }
   }
 
