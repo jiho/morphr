@@ -1,3 +1,6 @@
+#' @useDynLib morphr
+NULL
+
 #' Image moments
 #'
 #' Compute raw, central, or central normalised moments of a greyscale image.
@@ -61,74 +64,47 @@
 #'
 #' # those parameters are derived (with refinement) in functions of this package
 img_moments <- function(x, order=3) {
-  M <- x[,,1,1]
+  # extract pixel values
+  P <- x[,,1,1]
+  # when the image is logical (a mask), make it numeric for the Fortran code
+  if (is.logical(P)) {P <- P * 1.0}
 
-  # dimensions
-  w <- ncol(M)
-  h <- nrow(M)
+  # initialise moments matrix
+  M <- matrix(-1, nrow=order+1, ncol=order+1)
 
-  # matrices of indexes
-  # NB: computation assumes 0-based indexing
-  x <- matrix(rep(0:(w-1), times=h), nrow=h, byrow=TRUE)
-  y <- matrix(rep(0:(h-1), times=w), nrow=h)
-
-  # precompute powers, to avoid computing them several times in the moments matrix
-  xp <- lapply(0:order, function(i) {x^i})
-  yp <- lapply(0:order, function(i) {y^i})
-
-  # prepare storage for moments
-  m <- matrix(NA, nrow=order+1, ncol=order+1)
-  # compute moments
-  for (i in 0:order) {
-    for (j in 0:order) {
-      m[i+1,j+1] <- sum(xp[[i+1]]*yp[[j+1]]*M)
-    }
-  }
+  # call the fortran routine
+  res <- .Fortran("moments",
+                  P=P, nr=nrow(P), nc=ncol(P),
+                  M=M, no=as.integer(order+1))
 
   # transpose the matrix to match scikit-image row-col convention
-  # this makes it
-  m <- t(m)
-  return(m)
+  # and the natural orientation of the image
+  M <- t(res$M)
+
+  return(M)
 }
-
-
-
 
 #' @rdname img_moments
 #' @export
 img_moments_central <- function(x, order=3) {
-  M <- x[,,1,1]
+  # same as img_moments
+  P <- x[,,1,1]
+  if (is.logical(P)) {P <- P * 1.0}
 
-  # dimensions
-  h <- nrow(M)
-  w <- ncol(M)
-
-  # centroid
+  # except that coordinates are centred on the centroid
   m <- img_moments(x, order=1)
-  x_bar <- m[1,2]/m[1,1]
-  y_bar <- m[2,1]/m[1,1]
+  xbar <- m[1,2]/m[1,1]
+  ybar <- m[2,1]/m[1,1]
 
-  # matrices of indexes, relative to the centroid
-  # NB: computation assumes 0-based indexing
-  x <- matrix(rep(0:(w-1)-x_bar, times=h), nrow=h, byrow=TRUE)
-  y <- matrix(rep(0:(h-1)-y_bar, times=w), nrow=h)
-
-  # precompute powers, to avoid computing them several times in the moments matrix
-  xp <- lapply(0:order, function(i) {x^i})
-  yp <- lapply(0:order, function(i) {y^i})
-
-  # prepare storage for moments
-  mu <- matrix(NA, nrow=order+1, ncol=order+1)
-  # compute moments
-  for (i in 0:order) {
-    for (j in 0:order) {
-      mu[i+1,j+1] <- sum(xp[[i+1]]*yp[[j+1]]*M)
-    }
-  }
-
-  mu <- t(mu)
-  return(mu)
+  Mu <- matrix(-1, nrow=order+1, ncol=order+1)
+  res <- .Fortran("moments_central",
+                  P=P, nr=nrow(P), nc=ncol(P),
+                  xbar=xbar, ybar=ybar,
+                  M=Mu, no=as.integer(order+1))
+  Mu <- t(res$M)
+  return(Mu)
 }
+
 
 #' @rdname img_moments
 #' @export
