@@ -18,7 +18,7 @@ The orientation angle.
 Compute the orientation angle of the best fitting ellipse based on image moments.
 }
 \details{
-Image moments only make sense for light on dark images. If your image is dark on light, invert it before computing the orientation.
+Image moments only make sense for light on dark images. If your image is dark on light, invert it before computing the orientation with this function.
 
 On an image displayed with \code{\link[=img_show]{img_show()}}, the angle is given from the horizontal, in clockwise direction, in degrees. The computation gives it in trigonometric convention (from the horizontal, towards the positive side of the y axis, in radians) but (i) in an image, the y axis increases when going \emph{down}, (ii) the angle is converted in degrees for easiness.
 }
@@ -44,11 +44,10 @@ img_orientation(x>0, direction=TRUE)
 imager::imrotate(x>0, -225) \%>\% img_show()
 
 # try with a real image
-x <- img_read(system.file("extdata", "amphipoda/33463695.jpg", package="morphr"))
+# (NB: inverted to allow the computation of moments)
+x <- img_read(system.file("extdata", "amphipoda/33463695.jpg",
+              package="morphr"), invert=TRUE)
 img_show(x)
-# invert the image, for the computation of moments to work
-xi <- 1 - x
-a <- img_orientation(xi, direction=TRUE)
-(1 - imager::imrotate(xi, -a)) \%>\% img_show()
-# NB: re-invert the image before showing it
+a <- img_orientation(x, direction=TRUE)
+imager::imrotate(x, -a) \%>\% img_show()
 }
