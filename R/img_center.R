@@ -36,9 +36,7 @@ img_center <- function(x, w, h, around=NULL, col=NULL) {
   }
 
   # instead of padding on each side, just create an empty image and paste the current image at the correct location within it (much faster)
-
-  # create and empty image with the fill colour
-  xf <- imager::imfill(x=w, y=h, val=col)
+  xf <- matrix(0, nrow=h, ncol=w)
 
   # define corner point in width and height
   dims <- dim(x)
@@ -50,7 +48,10 @@ img_center <- function(x, w, h, around=NULL, col=NULL) {
   }
 
   # paste the image content there
-  xf[(cx+1):(cx+dims[1]),(cy+1):(cy+dims[2]),1,1] = x[,,1,1]
+  xf[(cx+1):(cx+dims[1]),(cy+1):(cy+dims[2])] <- x[,,1,1]
+
+  # convert back into a cimg object
+  xf <- imager::as.cimg(xf)
 
   return(xf)
 }
