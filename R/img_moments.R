@@ -1,4 +1,4 @@
-#' @useDynLib morphr
+#' @useDynLib morphr, .registration=TRUE
 NULL
 
 #' Image moments
