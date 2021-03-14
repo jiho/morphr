@@ -31,10 +31,10 @@ morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
   # read all images if x are paths
   if (is.character(x)) {
     ximg <- lapply(x, img_read, invert=invert)
-  } else if ( inherits(x, "imager-array") ){
+  } else if ( inherits(x[[1]], "imager_array") ){
     ximg <- x
   } else {
-    stop("x needs to be character or an image of class imager::cimg")
+    stop("x needs to be character or a list of images of class imager::cimg")
   }
 
   # rotate all images horizontally
