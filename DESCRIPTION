@@ -1,13 +1,13 @@
 Package: morphr
 Type: Package
 Title: Analyse the Morphology of Objects on Images
-Version: 0.3.0
+Version: 0.4.0
 Author: Jean-Olivier Irisson
 Maintainer: Jean-Olivier Irisson <irisson@normalesup.org>
 Description: Functions to analyse the morphology of objects in a reduced space,
   inspect this morphological space, "morph" similar images into one (align, rotate,
   and merge them), reprocess images to isolate objects or compute some features,
-  etc. Most of the image processing is done in Python through skimage.
+  etc.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
