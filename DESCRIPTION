@@ -1,7 +1,7 @@
 Package: morphr
 Type: Package
 Title: Analyse the Morphology of Objects on Images
-Version: 0.4.0
+Version: 0.5.0
 Author: Jean-Olivier Irisson
 Maintainer: Jean-Olivier Irisson <irisson@normalesup.org>
 Description: Functions to analyse the morphology of objects in a reduced space,
