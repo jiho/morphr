@@ -35,24 +35,22 @@ img_center <- function(x, w, h, around=NULL, col=NULL) {
     col <- img_guess_background(x)
   }
 
-  # Function to define padding length in one dimension
-  pads <- function(length, centroid, target) {
-    before <- round(target/2 - centroid)
-    after <- target - (before + length)
-    if (after < 0) {
-      stop("Target dimension too small")
-    }
-    return(c(before, after))
-  }
-  # define padding on width and height
-  dims <- dim(x)
-  padw <- pads(dims[1], around[1], w)
-  padh <- pads(dims[2], around[2], h)
+  # instead of padding on each side, just create an empty image and paste the current image at the correct location within it (much faster)
 
-  # perform the padding
-  x %>%
-    imager::pad(padw[1], axes="x", pos=-1, val=col) %>%
-    imager::pad(padw[2], axes="x", pos= 1, val=col) %>%
-    imager::pad(padh[1], axes="y", pos=-1, val=col) %>%
-    imager::pad(padh[2], axes="y", pos= 1, val=col)
+  # create and empty image with the fill colour
+  xf <- imager::imfill(x=w, y=h, val=col)
+
+  # define corner point in width and height
+  dims <- dim(x)
+  cx <- max(0, round(w/2 - around[1]))
+  cy <- max(0, round(h/2 - around[2]))
+  # quick dimension checks
+  if ((cx+dims[1]) > w | (cy+dims[2]) > h) {
+    stop("Target dimensions w or h too small to center image")
+  }
+
+  # paste the image content there
+  xf[(cx+1):(cx+dims[1]),(cy+1):(cy+dims[2]),1,1] = x[,,1,1]
+
+  return(xf)
 }
