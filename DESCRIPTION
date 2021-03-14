@@ -17,10 +17,12 @@ NeedsCompilation: yes
 Depends:
   R (>= 2.10)
 Imports:
-  imager,
-  grid,
-  FactoMineR,
-  stats,
-  dplyr,
-  ggplot2,
-  rlang
+    imager,
+    grid,
+    FactoMineR,
+    stats,
+    grDevices,
+    dplyr,
+    ggplot2,
+    rlang,
+    magrittr
