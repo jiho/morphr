@@ -1,6 +1,6 @@
 #' Tile morphs within a morphological space
 #'
-#' @param space morphological space object created by [morpho_space()].
+#' @param space morphological space object created by [morphospace()].
 #' @param imgs vector of paths to images; should have as many elements as are in the morphological space
 # TODO specify that at the time of construction of the mopho space
 #' @param dimensions couple of dimensions to plot.
@@ -15,7 +15,7 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' space <- morpho_space(plank[,-(1:2)], weights=plank$conc)
+#' space <- morphospace(plank[,-(1:2)], weights=plank$conc)
 #' img_root <- system.file("extdata", "plank", package="morphr")
 #' imgs <- file.path(img_root, paste0(plank$id, ".jpg"))
 #' ggmorph_tile(space, imgs)
@@ -54,7 +54,7 @@ ggmorph_tile <- function(space, imgs, dimensions=c(1,2), steps=5, n_imgs=5, adju
 #'
 #' @importFrom dplyr %>%
 #' @examples
-#' space <- morpho_space(plank[,-(1:2)], weights=plank$conc)
+#' space <- morphospace(plank[,-(1:2)], weights=plank$conc)
 #' img_root <- system.file("extdata", "plank", package="morphr")
 #' imgs <- file.path(img_root, paste0(plank$id, ".jpg"))
 #' set.seed(1)
@@ -152,7 +152,7 @@ ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey) {
       # compute the actual position of the bin's center
       x=mean(.data$x), y=mean(.data$y),
       # and morph the n_imgs
-      img=list(morph(imgs[.data$i], adjust_grey=adjust_grey)/255)
+      img=list(morph(imgs[.data$i], adjust_grey=adjust_grey))
     ) %>%
     # measure the dimensions of each image
     dplyr::group_by(.data$bin) %>%
@@ -188,10 +188,10 @@ ggmorph_plot <- function(Xm, scale) {
   for (i in 1:nrow(Xm)) {
     Xi <- Xm[i,]
     p <- p + ggplot2::annotation_custom(
-      grid::rasterGrob(make_transparent(Xi$img[[1]])),
+      grid::rasterGrob(img_make_transparent(Xi$img[[1]]) %>% as_rgba_raster()),
       xmin=Xi$x-Xi$w*scale, xmax=Xi$x+Xi$w*scale,
       ymin=Xi$y-Xi$h*scale, ymax=Xi$y+Xi$h*scale
-      # TODO scale by power low or something, to see better the small ones
+      # TODO scale by power law or something, to see better the small ones
     )
   }
 

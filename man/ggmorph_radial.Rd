@@ -4,8 +4,16 @@
 \alias{ggmorph_radial}
 \title{Display morphs radially within a morphological space}
 \usage{
-ggmorph_radial(space, imgs, dimensions = c(1, 2), directions = 4,
-  steps = 2, n_imgs = 5, adjust_grey = TRUE, scale = 0.01)
+ggmorph_radial(
+  space,
+  imgs,
+  dimensions = c(1, 2),
+  directions = 4,
+  steps = 2,
+  n_imgs = 5,
+  adjust_grey = TRUE,
+  scale = 0.01
+)
 }
 \arguments{
 \item{space}{morphological space object created by \code{\link[=morpho_space]{morpho_space()}}.}
@@ -20,7 +28,7 @@ ggmorph_radial(space, imgs, dimensions = c(1, 2), directions = 4,
 
 \item{n_imgs}{number of images to randomly select and morph in each tile.}
 
-\item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the orignal images it was constructed with. Usually, computing the average(i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computatin and is therefore switched off by default.}
+\item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the original images it was constructed with. Usually, computing the average (i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computation and is therefore switched off by default.}
 
 \item{scale}{scaling factor used to display the images; from pixels to morphological space dimensions units.}
 }

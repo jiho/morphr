@@ -3,12 +3,10 @@
 #' @param imgs vector of paths to images
 #' @export
 #' @examples
-#' paths <- list.files(
-#'   system.file("extdata", "plank", package="morphr"),
-#'   full.names=TRUE
-#' )
+#' paths <- list.files(system.file("extdata", "plank",
+#'                     package="morphr"), full.names=TRUE)
 #' ggimg_grid(imgs=sample(paths, 15), scale=0.002)
-#' ggimg_grid(imgs=sample(paths, 50), scale=0.001)
+#' ggimg_grid(imgs=sample(paths, 56), scale=0.001)
 ggimg_grid <- function(imgs, scale=0.001) {
   n <- length(imgs)
   if (n > 100) {
@@ -21,7 +19,7 @@ ggimg_grid <- function(imgs, scale=0.001) {
   X <- X[1:n,]
 
   # read all images
-  X$img <- lapply(imgs, pymorph$img_read)
+  X$img <- lapply(imgs, img_read)
 
   # compute width and height
   X <- X %>% dplyr::rowwise() %>% dplyr::mutate(w=ncol(img), h=nrow(img))
@@ -33,14 +31,14 @@ ggimg_grid <- function(imgs, scale=0.001) {
     # remove decoration
     ggplot2::theme_void()
 
-  # plot each morphed image
+  # plot each image
   for (i in 1:nrow(X)) {
     Xi <- X[i,]
     p <- p + ggplot2::annotation_custom(
-      grid::rasterGrob(make_transparent(Xi$img[[1]])),
+      grid::rasterGrob(img_make_transparent(Xi$img[[1]]) %>% as_rgba_raster()),
       xmin=Xi$x-Xi$w*scale, xmax=Xi$x+Xi$w*scale,
       ymin=Xi$y-Xi$h*scale, ymax=Xi$y+Xi$h*scale
-      # TODO scale by power low or something, to see better the small ones
+      # TODO scale by power law or something, to see better the small ones
     )
   }
 
