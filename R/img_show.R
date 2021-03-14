@@ -28,7 +28,7 @@ img_show <- function(x) {
   grid::grid.rect(gp=grid::gpar(fill="grey50", col=NA))
   # draw the image
   grid::grid.raster(xm, interpolate=FALSE)
-  # TODO allow to plot over it, maybe revert ot plot then...
+  # TODO allow to plot over it, maybe revert to plot then...
 
   return(invisible(x))
 }
