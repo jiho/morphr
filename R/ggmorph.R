@@ -11,7 +11,6 @@
 #'
 #' @export
 #'
-#' @importFrom dplyr %>%
 #' @importFrom rlang .data
 #'
 #' @examples
@@ -52,7 +51,6 @@ ggmorph_tile <- function(space, imgs, dimensions=c(1,2), steps=5, n_imgs=5, adju
 #'
 #' @export
 #'
-#' @importFrom dplyr %>%
 #' @examples
 #' space <- morphospace(plank[,-(1:2)], weights=plank$conc)
 #' img_root <- system.file("extdata", "plank", package="morphr")

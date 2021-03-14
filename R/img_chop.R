@@ -9,7 +9,6 @@
 #' @return The image with the pixels chopped off.
 #'
 #' @export
-#' @importFrom dplyr %>%
 #' @examples
 #' x <- img_read(system.file("extdata", "blob.jpg", package="morphr"))
 #' img_show(x)

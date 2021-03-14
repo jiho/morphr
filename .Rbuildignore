@@ -3,3 +3,4 @@
 .*\.pyc
 .*__pycache__.*
 scratch/*
+pca_morphs12.png

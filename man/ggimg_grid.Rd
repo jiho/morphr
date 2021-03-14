@@ -8,6 +8,8 @@ ggimg_grid(imgs, scale = 0.001)
 }
 \arguments{
 \item{imgs}{vector of paths to images}
+
+\item{scale}{scaling factor used to display the images; from pixels to plot dimensions (in [0,1]).}
 }
 \description{
 Plot a grid of images

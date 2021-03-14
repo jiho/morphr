@@ -10,6 +10,8 @@ img_extract_largest(x, threshold = 2/255, quiet = FALSE)
 \item{x}{a greyscale image, of type \code{\link[imager:cimg]{imager::cimg()}}}
 
 \item{threshold}{grey value threshold to detect the object over the background. Either a number in \verb{[0,1]} where \code{0} is pure black and \code{1} is pure white, or a string with a grey level quantile value (e.g. "50\%" to keep 50\% of the greys in the foreground).}
+
+\item{quiet}{when TRUE, do not display the message about image inversion when providing an image on a light background.}
 }
 \value{
 The extracted object, on a pure white background, as a \code{\link[imager:cimg]{imager::cimg()}} object.

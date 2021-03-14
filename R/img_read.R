@@ -10,7 +10,7 @@
 #' img_read(path) %>% img_show()
 #' img_read(path, invert=TRUE) %>% img_show()
 #' # or shorter
-#' img_read(path, i=T) %>% img_show()
+#' img_read(path, i=TRUE) %>% img_show()
 img_read <- function(file, invert=FALSE) {
   im <- imager::load.image(file)
   # keep only one colour channel

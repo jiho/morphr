@@ -6,11 +6,11 @@
 #'
 #' @inheritParams img_make_transparent
 #' @param threshold grey value threshold to detect the object over the background. Either a number in `[0,1]` where `0` is pure black and `1` is pure white, or a string with a grey level quantile value (e.g. "50%" to keep 50% of the greys in the foreground).
+#' @param quiet when TRUE, do not display the message about image inversion when providing an image on a light background.
 #'
 #' @return The extracted object, on a pure white background, as a [imager::cimg()] object.
 #'
 #' @export
-#' @importFrom dplyr %>%
 #' @examples
 #' # get an image with lots of background space, several blobs and a legend
 #' # NB: invert it so that the background is black

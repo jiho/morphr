@@ -1,7 +1,10 @@
 #' Plot a grid of images
 #'
 #' @param imgs vector of paths to images
+#' @param scale scaling factor used to display the images; from pixels to plot dimensions (in \[0,1\]).
+#'
 #' @export
+#' @importFrom rlang .data
 #' @examples
 #' paths <- list.files(system.file("extdata", "plank",
 #'                     package="morphr"), full.names=TRUE)
@@ -22,7 +25,7 @@ ggimg_grid <- function(imgs, scale=0.001) {
   X$img <- lapply(imgs, img_read)
 
   # compute width and height
-  X <- X %>% dplyr::rowwise() %>% dplyr::mutate(w=ncol(img), h=nrow(img))
+  X <- X %>% dplyr::rowwise() %>% dplyr::mutate(w=ncol(.data$img), h=nrow(.data$img))
 
   # plot
   p <- ggplot2::ggplot() +
