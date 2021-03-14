@@ -53,7 +53,7 @@ morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
   xcropped <- imager::autocrop(xarray, color=0)
 
   # average (i.e. morph)
-  xavg <- apply(xcropped[,,,1], 1:2, mean) %>% imager::as.cimg()
+  xavg <- imager::imsplit(xcropped, "z") %>% imager::average()
 
   if (adjust_grey) {
     # compute the average of the average greys of the input image
