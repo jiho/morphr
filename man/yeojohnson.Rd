@@ -14,10 +14,7 @@ yeojohnson(x, lambda = NULL, eps = 0.001)
 \item{eps}{the tolerance value under which lamba is considered to be 0 and that is used to choose the appropriate formula.}
 }
 \value{
-A list of class \code{yeojohnson} with elements
-\item{data}{original data}
-\item{transformed}{transformed data}
-\item{lambda}{lambda value used for the transformation (possibly estimated)}
+A vector of transformed values, with an attribute to store the lambda value. The object if of class 'yeojohnson' and can be used with \code{\link[=predict.yeojohnson]{predict.yeojohnson()}}.
 }
 \description{
 Perform Yeo-Johnson transformation to attempt normalization.
@@ -29,8 +26,8 @@ The Yeo-Johnson is similar to the Box-Cox method, however it allows for the tran
 # simulate non-normal data
 x <- rgamma(100, 1, 1)
 hist(x)
-xt <- yeojohnson(x)
-hist(xt$transformed)
+# and make it more normal looking
+hist(yeojohnson(x))
 }
 \references{
 Yeo, I. K., & Johnson, R. A. (2000). A new family of power transformations to improve normality or symmetry. Biometrika.

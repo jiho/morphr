@@ -17,14 +17,12 @@
 Transform new data using an already fitted Yeo-Johnson object
 }
 \examples{
-# simulate non-normal data
+# fit the Yeo=-Johnson transfomration on non-normal data
 x <- rgamma(100, 1, 1)
 hist(x)
 xt <- yeojohnson(x)
-hist(xt$transformed)
-
 # apply the same transformation to new data
 x2 <- rgamma(100, 1, 1)
-xt2 <- predict(xt, newdata=x2)
-hist(xt2)
+hist(x2)
+hist(predict(xt, newdata=x2))
 }
