@@ -39,16 +39,15 @@ img_extract_largest <- function(x, threshold=2/255, quiet=FALSE) {
   }
 
   # segment image into particles
-  particles <- x %>%
+  xlabelled <- x %>%
     imager::threshold(thr=threshold) %>%
-    imager::split_connected()
+    imager::label()
 
   # find the largest one
-  largest <- particles[[sapply(particles, sum) %>% which.max()]]
+  label_of_largest <- which.max(tabulate(xlabelled))
 
   # mask-out the outside of the object, which becomes pure black
-  # (largest is a mask, with 0 outside of the object)
-  xmasked <- (x * largest)
+  xmasked <- (x * (xlabelled == label_of_largest))
   # then we crop to the limits of the object
   xcropped <- imager::autocrop(xmasked)
 
