@@ -11,7 +11,9 @@ ggmorph_tile(
   steps = 5,
   n_imgs = 5,
   adjust_grey = TRUE,
-  scale = 0.01
+  scale = 0.01,
+  fun = NULL,
+  ...
 )
 }
 \arguments{
@@ -28,6 +30,10 @@ ggmorph_tile(
 \item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the original images it was constructed with. Usually, computing the average (i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computation and is therefore switched off by default.}
 
 \item{scale}{scaling factor used to display the images; from pixels to morphological space dimensions units.}
+
+\item{fun}{function to apply to each image, as a pre-processing step (a typical one is \code{\link[=img_chop]{img_chop()}} to remove a scale bar added to the image).}
+
+\item{...}{passed to \code{fun}.}
 }
 \description{
 Tile morphs within a morphological space
@@ -36,7 +42,7 @@ Tile morphs within a morphological space
 space <- morphospace(plank[,-(1:2)], weights=plank$conc)
 img_root <- system.file("extdata", "plank", package="morphr")
 imgs <- file.path(img_root, paste0(plank$id, ".jpg"))
-ggmorph_tile(space, imgs)
+ggmorph_tile(space, imgs, fun=img_chop, bottom=10)
 ggmorph_tile(space, imgs, step=8, scale=0.005)
 ggmorph_tile(space, imgs, dim=c(3,4), scale=0.004)
 }

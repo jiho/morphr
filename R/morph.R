@@ -6,6 +6,9 @@
 #' @param adjust_grey whether to adjust the mean grey level of the morphed image to match that of the original images it was constructed with. Usually, computing the average (i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computation and is therefore switched off by default.
 #' @param threshold grey level threshold used to separate the foreground object from the background for the adjustment of grey level. Ignored when `adjust_grey` is FALSE.
 #' @param invert passed to [img_read()] when `x` is a list/vector of file paths: whether to invert the images when reading them. If images are inverted upon being read, the morphed result is inverted back to be produced with the same aspect as the input files.
+#' @param fun function to apply to each image, as a pre-processing step (a typical one is [img_chop()] to remove a scale bar added to the image).
+#' @param ... passed to `fun`.
+#'
 #'
 #' @return The morphed image, as a [imager::cimg()] object.
 #'
@@ -27,7 +30,7 @@
 #' img_read(cres[2]) %>% img_show()
 #' morph(cres) %>% img_show()
 #' morph(cres, adjust_grey=TRUE) %>% img_show()
-morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
+morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE, fun=NULL, ...) {
   # read all images if x are paths
   if (is.character(x)) {
     ximg <- lapply(x, img_read, invert=invert)
@@ -35,6 +38,10 @@ morph <- function(x, adjust_grey=FALSE, threshold=2/255, invert=TRUE) {
     ximg <- x
   } else {
     stop("x needs to be character or a list of images of class imager::cimg")
+  }
+  # optionally pre-process images
+  if (!is.null(fun)) {
+    ximg <- lapply(ximg, fun, ...)
   }
 
   # rotate all images horizontally

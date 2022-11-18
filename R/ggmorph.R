@@ -17,10 +17,10 @@
 #' space <- morphospace(plank[,-(1:2)], weights=plank$conc)
 #' img_root <- system.file("extdata", "plank", package="morphr")
 #' imgs <- file.path(img_root, paste0(plank$id, ".jpg"))
-#' ggmorph_tile(space, imgs)
+#' ggmorph_tile(space, imgs, fun=img_chop, bottom=10)
 #' ggmorph_tile(space, imgs, step=8, scale=0.005)
 #' ggmorph_tile(space, imgs, dim=c(3,4), scale=0.004)
-ggmorph_tile <- function(space, imgs, dimensions=c(1,2), steps=5, n_imgs=5, adjust_grey=TRUE, scale=0.01) {
+ggmorph_tile <- function(space, imgs, dimensions=c(1,2), steps=5, n_imgs=5, adjust_grey=TRUE, scale=0.01, fun=NULL, ...) {
   # get objects in the full space that are close to the plane defined by the selected dimensions
   X <- ggmorph_get(space, dimensions)
 
@@ -36,7 +36,7 @@ ggmorph_tile <- function(space, imgs, dimensions=c(1,2), steps=5, n_imgs=5, adju
   X$bin <- interaction(X$xbin, X$ybin)
 
   # construct the morph in each tile
-  Xm <- ggmorph_morph(X, imgs, n_imgs, adjust_grey)
+  Xm <- ggmorph_morph(X, imgs, n_imgs, adjust_grey, fun=fun, ...)
 
   # and plot all morphs
   ggmorph_plot(Xm, scale)
@@ -59,7 +59,7 @@ ggmorph_tile <- function(space, imgs, dimensions=c(1,2), steps=5, n_imgs=5, adju
 #' ggmorph_radial(space, imgs)
 #' ggmorph_radial(space, imgs, directions=10, steps=4, scale=0.005)
 #' ggmorph_radial(space, imgs, dim=c(3,4), scale=0.004)
-ggmorph_radial <- function(space, imgs, dimensions=c(1,2), directions=4, steps=2, n_imgs=5, adjust_grey=TRUE, scale=0.01) {
+ggmorph_radial <- function(space, imgs, dimensions=c(1,2), directions=4, steps=2, n_imgs=5, adjust_grey=TRUE, scale=0.01, fun=NULL, ...) {
   # get objects in the full space that are close to the plane defined by the selected dimensions
   X <- ggmorph_get(space, dimensions)
 
@@ -101,7 +101,7 @@ ggmorph_radial <- function(space, imgs, dimensions=c(1,2), directions=4, steps=2
   X$bin <- interaction(X$abin, X$rbin)
 
   # construct the morph in each tile
-  Xm <- ggmorph_morph(X, imgs, n_imgs, adjust_grey)
+  Xm <- ggmorph_morph(X, imgs, n_imgs, adjust_grey, fun=fun, ...)
 
   # and plot all morphs
   ggmorph_plot(Xm, scale)
@@ -139,7 +139,7 @@ ggmorph_get <- function(space, dimensions) {
 
 
 # Build morphs in each bin
-ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey) {
+ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey, fun=fun, ...) {
   if (n_imgs > 100) {
     stop("n_imgs is too big")
   }
@@ -150,7 +150,7 @@ ggmorph_morph <- function(X, imgs, n_imgs, adjust_grey) {
       # compute the actual position of the bin's center
       x=mean(.data$x), y=mean(.data$y),
       # and morph the n_imgs
-      img=list(morph(imgs[.data$i], adjust_grey=adjust_grey))
+      img=list(morph(imgs[.data$i], adjust_grey=adjust_grey, fun=fun, ...))
     ) %>%
     # measure the dimensions of each image
     dplyr::group_by(.data$bin) %>%

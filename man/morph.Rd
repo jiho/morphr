@@ -4,7 +4,14 @@
 \alias{morph}
 \title{Morph several images into one}
 \usage{
-morph(x, adjust_grey = FALSE, threshold = 2/255, invert = TRUE)
+morph(
+  x,
+  adjust_grey = FALSE,
+  threshold = 2/255,
+  invert = TRUE,
+  fun = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{list of images, of type \code{\link[imager:cimg]{imager::cimg()}}, or list/vector of file paths that are then read with \code{\link[=img_read]{img_read()}}.}
@@ -14,6 +21,10 @@ morph(x, adjust_grey = FALSE, threshold = 2/255, invert = TRUE)
 \item{threshold}{grey level threshold used to separate the foreground object from the background for the adjustment of grey level. Ignored when \code{adjust_grey} is FALSE.}
 
 \item{invert}{passed to \code{\link[=img_read]{img_read()}} when \code{x} is a list/vector of file paths: whether to invert the images when reading them. If images are inverted upon being read, the morphed result is inverted back to be produced with the same aspect as the input files.}
+
+\item{fun}{function to apply to each image, as a pre-processing step (a typical one is \code{\link[=img_chop]{img_chop()}} to remove a scale bar added to the image).}
+
+\item{...}{passed to \code{fun}.}
 }
 \value{
 The morphed image, as a \code{\link[imager:cimg]{imager::cimg()}} object.

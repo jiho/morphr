@@ -12,7 +12,9 @@ ggmorph_radial(
   steps = 2,
   n_imgs = 5,
   adjust_grey = TRUE,
-  scale = 0.01
+  scale = 0.01,
+  fun = NULL,
+  ...
 )
 }
 \arguments{
@@ -31,6 +33,10 @@ ggmorph_radial(
 \item{adjust_grey}{whether to adjust the mean grey level of the morphed image to match that of the original images it was constructed with. Usually, computing the average (i.e. the morphing) results in lighter images; this compensates it a little. Note that it requires more intense computation and is therefore switched off by default.}
 
 \item{scale}{scaling factor used to display the images; from pixels to morphological space dimensions units.}
+
+\item{fun}{function to apply to each image, as a pre-processing step (a typical one is \code{\link[=img_chop]{img_chop()}} to remove a scale bar added to the image).}
+
+\item{...}{passed to \code{fun}.}
 }
 \description{
 Display morphs radially within a morphological space
