@@ -120,7 +120,14 @@ ggmorph_get <- function(space, dimensions) {
   # detect points close to the plane of interest
   # = in the middle of the other dimensions
   middle <- X[,-c(dimensions)] %>%
-    sapply(function(x) {dplyr::between(x, 0-stats::sd(x), 0+stats::sd(x))}) %>%
+    sapply(function(x) {
+      in_middle <- dplyr::between(x, 0-stats::sd(x), 0+stats::sd(x))
+      # deal with the case of a dimension with very very little variance
+      # => all objects are not within 1 SD of the center
+      # consider them all
+      if (all(!in_middle)) { in_middle[] <- TRUE }
+      return(in_middle)
+    }) %>%
     apply(1, all)
 
   # reformat X
