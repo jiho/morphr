@@ -23,7 +23,9 @@ mask_extreme <- function(x, percent=c(0.5,0.5)) {
   if (length(percent) != 2) {
     stop("percent should contain one or two values")
   }
-  x[x < quantile(x, percent[1]/100, na.rm=TRUE)] <- NA
-  x[x > quantile(x, 1 - (percent[2]/100), na.rm=TRUE)] <- NA
+  if (!all(percent == 0)) {
+    x[x < quantile(x, percent[1]/100, na.rm=TRUE)] <- NA
+    x[x > quantile(x, 1 - (percent[2]/100), na.rm=TRUE)] <- NA
+  }
   return(x)
 }
