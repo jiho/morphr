@@ -1,3 +1,4 @@
+#' @importFrom stats quantile
 mask_values <- function(x, percent=c(0.5,0.5), winsorize=FALSE) {
   if (length(percent) == 1) {
     percent <- c(percent, percent)
